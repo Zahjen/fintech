@@ -6,13 +6,21 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { BodyComponent } from './component/body/body.component';
 import { DashboardContainerComponent } from './component/dashboad/dashboard-container/dashboard-container.component';
+import { FormContainerComponent } from './component/form/overview/form-container/form-container.component';
+import { FormContainerItemComponent } from './component/form/overview/form-container-item/form-container-item.component';
+import { FormItemComponent } from './component/form/overview/form-item/form-item.component';
+import { MyFormContainerComponent } from './component/form/my-form/my-form-container/my-form-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     BodyComponent,
-    DashboardContainerComponent
+    DashboardContainerComponent,
+    FormContainerComponent,
+    FormContainerItemComponent,
+    FormItemComponent,
+    MyFormContainerComponent
   ],
   imports: [
     BrowserModule,

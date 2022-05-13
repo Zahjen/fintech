@@ -1,10 +1,10 @@
 export const tab = [
     {
-        routeLink: 'dashboard',
+        routeLink: 'component/dashboard/dashboard-container',
         label: 'Dashboard'
     },
     {
-        routeLink: 'form-overview',
+        routeLink: 'component/form/overview/form-container',
         label: 'Form'
     },
     {

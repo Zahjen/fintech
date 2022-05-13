@@ -1,0 +1,9 @@
+@use "../variable/style/size";
+@use "../variable/style/padding";
+@use "../variable/style/mixin";
+
+app-body {
+    @include mixin.width-height(100%, auto);
+    @include mixin.flex(column, flex-start, flex-start);
+    padding: padding.$TB-body padding.$LR-body padding.$TB-body calc(size.$width-nav-bar + padding.$LR-body);
+}
