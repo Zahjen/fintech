@@ -1,0 +1,62 @@
+@use "../../../variable/style/color";
+@use "../../../variable/style/mixin";
+@use "../../../variable/style/padding";
+@use "../../../variable/style/size";
+
+nav #nav-checkbox, nav .nav-button {
+    display: none;
+}
+
+nav .nav-bar-container {
+    @include mixin.width-height(size.$width-nav-bar, 100vh);
+    @include mixin.flex(column, space-between, center);
+    background-color: color.$primary;
+    color: color.$black;
+    padding: padding.$TB-body 0;
+    position: fixed;
+
+    .logo {
+        @include mixin.flex(column, center, center);
+        width: auto;
+        line-height: 1.2;
+
+        span {
+            width: auto;
+            font-weight: bold;
+            font-size: 25px;
+        }
+    }
+
+    .nav-links {
+        @include mixin.flex(column, center, center);
+        @include mixin.width-height(100%, 100%);
+
+        a {
+            @include mixin.width-height(100%, auto);
+            @include mixin.transition(transform, 0.1s, linear);
+            text-align: center;
+            color: color.$black;
+            font-size: 18px;
+            padding: 15px;
+
+            &:hover:not(.active) {
+                background: linear-gradient(to left, color.$black 0%, color.$black 3%, color.$primary 3%) no-repeat left bottom / 100% 100%;
+            }
+        }
+
+        .active {
+            background: linear-gradient(to left, color.$black 0%, color.$black 3%, color.$secondary 3%) no-repeat left bottom / 100% 100%;
+        }
+    }
+}
+
+
+@media screen and (max-height: 500px) {
+    nav .nav-bar-container {
+        justify-content: center;
+
+        .logo, .nav-links .contact-link, .ghost {
+            display: none;
+        }
+    }
+}

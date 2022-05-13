@@ -1,1 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use "variable/style/color";
+@use "variable/style/mixin";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
+
+    // On change pour chaque élément le style de la scroll bar
+    scrollbar-width: thin;
+    scrollbar-color: color.$secondary;
+
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        width: 9px;
+        height: 9px;
+    }
+
+    &::-webkit-scrollbar-track {
+        border: 10px solid color.$primary;
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: color.$secondary;
+        border-radius: 5px;
+    }
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h1 {
+    margin-bottom: 50px;
+}
+
+.button-fill {
+    @include mixin.width-height(auto, auto);
+    @include mixin.border-radius(50px);
+    @include mixin.transition(all, 0.1s, ease-in);
+
+    background-color: color.$black;
+    border: 2px solid color.$black;
+    color: color.$white;
+    padding: 3px 40px;
+
+    &:hover {
+        background-color: transparent;
+        color: color.$black;
+    }
+}
+
+.button-empty {
+    @include mixin.width-height(auto, auto);
+    @include mixin.border-radius(50px);
+    @include mixin.transition(all, 0.1s, ease-in);
+
+    background-color: transparent;
+    border: 2px solid color.$black;
+    color: color.$black;
+    padding: 3px 40px;
+
+    &:hover {
+        background-color: color.$black;
+        color: color.$white;
+    }
+}
+
+.button-card {
+    @include mixin.width-height(auto, auto);
+    @include mixin.border-radius(50px);
+    @include mixin.transition(all, 0.1s, ease-in);
+
+    background-color: color.$secondary;
+    border: 2px solid color.$secondary;
+    color: color.$black;
+    padding: 3px 40px;
+
+    &:hover {
+        background-color: transparent;
+        color: color.$black;
+    }
+}

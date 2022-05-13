@@ -1,0 +1,30 @@
+<nav class="nav"> 
+    <!-- Burger menu relate to mobile version -->
+    <input type="checkbox" id="nav-checkbox">
+    <label for="nav-checkbox" class="nav-button">
+        <span class="line-1"></span>
+        <span class="line-2"></span>
+        <span class="line-3"></span>
+    </label>
+
+    <!-- Nav bar -->
+    <div class="nav-bar-container">
+        <div class="logo">
+            <span>
+                Surname
+            </span>
+            <span>
+                Name
+            </span>
+        </div>     
+
+        <!-- Navigation link -->
+        <div class="nav-links">
+            <a class="part-link-page" *ngFor="let data of navDataLink" [routerLink]="[data.routeLink]" routerLinkActive="active">
+                {{ data.label }}
+            </a>
+        </div>
+
+        <div class="ghost"></div>
+    </div> 
+</nav> 
