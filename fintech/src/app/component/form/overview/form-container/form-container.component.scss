@@ -1,0 +1,14 @@
+@use "../../../../../variable/style/mixin";
+
+.subtitle-container {
+    @include mixin.flex(row, flex-start, center);
+
+    margin-bottom: 70px;
+
+    .subtitle-text {
+        width: auto;
+        font-size: 25px;
+        margin-right: 80px;
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,5 @@
+@use "../../../../../variable/style/mixin";
+
+app-form-item {
+    @include mixin.width-height(100%, auto);
+}

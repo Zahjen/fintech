@@ -1,1 +1,19 @@
-<p>form-item works!</p>
+<div class="item">
+    <div class="item-text item-entreprise">
+        {{ finishedFormInfo.entrepriseName }}
+    </div>
+    <div class="item-text item-date">
+        {{ finishedFormInfo.date }}
+    </div>
+    <div class="item-text item-status">
+        <span class="item-status-label">
+            Status inherent risk: 
+        </span>
+        <span class="item-status-data">
+            {{ finishedFormInfo.ineherentRisk }}
+        </span>
+    </div>
+    <a class="item-read-more button-card">
+        Read More
+    </a>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { finishedFormInfo } from 'src/variable/script/finished-form-info';
 
 @Component({
   selector: 'app-form-container-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-container-item.component.scss']
 })
 export class FormContainerItemComponent implements OnInit {
+
+  finishedFormInfo = finishedFormInfo;
 
   constructor() { }
 

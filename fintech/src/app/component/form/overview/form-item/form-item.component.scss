@@ -1,0 +1,25 @@
+@use "../../../../../variable/style/color";
+@use "../../../../../variable/style/mixin";
+@use "../../../../../variable/style/padding";
+
+.item {
+    @include mixin.width-height(100%, auto);
+    @include mixin.border-radius(15px);
+
+    display: grid;
+    grid-template-columns: 1fr 20% 1fr auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+
+    background-color: color.$primary;
+    padding: padding.$TB-item padding.$LR-item;
+    margin-bottom: 30px;
+
+    a {
+        margin-left: 20px;
+    }
+
+    .item-text:first-child {
+        padding-right: 20px;
+    }
+}

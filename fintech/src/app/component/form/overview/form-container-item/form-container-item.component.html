@@ -1,1 +1,3 @@
-<p>form-container-item works!</p>
+<div class="item-container" *ngFor="let data of finishedFormInfo">
+    <app-form-item [finishedFormInfo]="data"></app-form-item>
+</div>

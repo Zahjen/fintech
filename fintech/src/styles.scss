@@ -85,3 +85,7 @@ h1 {
         color: color.$black;
     }
 }
+
+app-form-container {
+    @include mixin.width-height(100%, auto);
+}
