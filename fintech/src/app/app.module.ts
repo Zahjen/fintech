@@ -10,6 +10,7 @@ import { FormContainerComponent } from './component/form/overview/form-container
 import { FormContainerItemComponent } from './component/form/overview/form-container-item/form-container-item.component';
 import { FormItemComponent } from './component/form/overview/form-item/form-item.component';
 import { MyFormContainerComponent } from './component/form/my-form/my-form-container/my-form-container.component';
+import { MyFormEntrepriseComponent } from './component/form/my-form/my-form-entreprise/my-form-entreprise.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MyFormContainerComponent } from './component/form/my-form/my-form-conta
     FormContainerComponent,
     FormContainerItemComponent,
     FormItemComponent,
-    MyFormContainerComponent
+    MyFormContainerComponent,
+    MyFormEntrepriseComponent
   ],
   imports: [
     BrowserModule,

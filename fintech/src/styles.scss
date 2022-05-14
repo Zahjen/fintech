@@ -86,6 +86,11 @@ h1 {
     }
 }
 
-app-form-container {
+app-form-container, app-my-form-container {
     @include mixin.width-height(100%, auto);
+}
+
+app-my-form-container {
+    max-width: 1100px;
+    margin: 0 auto;
 }
