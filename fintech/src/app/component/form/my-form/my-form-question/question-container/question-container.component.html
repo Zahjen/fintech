@@ -1,0 +1,16 @@
+<div [hidden]="question.isHidden" class="my-form-question-container">
+
+	<div class="question-item-container">
+		<app-question-template 
+			[form]="myForm" 
+			[question]="question"
+		></app-question-template>
+	</div>
+
+	<div class="question-button-container">
+		<button (click)="previousButton(index)" class="button-empty previous-button">Previous</button>
+		<button (click)="nextButton(index)" class="button-fill next-button">Next</button>
+	</div>
+
+</div>
+

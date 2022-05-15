@@ -1,0 +1,63 @@
+@use "../../../../../../variable/style/color";
+@use "../../../../../../variable/style/mixin";
+
+.question-template-container {
+    @include mixin.flex(column, center, center);
+    @include mixin.width-height(100%, auto);
+
+    .question-template-item-container {
+        @include mixin.width-height(100%, auto);
+    }
+    
+    .question-answer-border {
+        @include mixin.clip-path(polygon(0% 0%, 0% 70%, 7% 100%, 100% 100%, 100% 0%));
+
+        background-color: color.$primary;
+        margin: 20px 0;
+        padding: 0 0 3px 3px;
+
+        .question-answer-container {
+            @include mixin.flex(row, center, center);
+            @include mixin.clip-path(polygon(0% 0%, 0% 70%, 7% 100%, 100% 100%, 100% 0%));
+            
+            background-color: color.$white;
+            padding: 30px 50px;
+            
+            .question-answer-radio-container {
+                @include mixin.flex(row, center, center);
+
+                .question-answer-radio-item {
+                    @include mixin.flex(row, center, center);
+
+                    margin-left: 30px;
+
+                    input[type='radio'] {
+                        @include mixin.width-height(20px, 20px);
+
+                        margin-right: 20px;
+                        filter: grayscale(1);
+                    }
+
+                    span {
+                        margin-right: 30px;
+                    }
+                }
+            }
+
+            .question-answer-select-container {
+                @include mixin.width-height(500px, auto);
+
+                background-color: transparent;
+                font-size: 16px;
+                padding: 5px 0;
+                border: none;
+                border-bottom: 2px solid color.$secondary;
+                outline: none;
+            }
+        }
+    }
+
+    .error-message {
+        color: color.$warning;
+    }
+}

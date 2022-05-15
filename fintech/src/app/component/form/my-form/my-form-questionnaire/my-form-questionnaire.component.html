@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+	<div *ngFor="let question of questions; let i = index">
+		<app-question-container
+			[myForm]="form"
+			[questions]="questions"
+			[question]="question"
+			[index]="i"
+		></app-question-container>
+	</div>
+
+	
+	<pre>
+		{{form.value | json}}
+	</pre>
+	<!---->
+</form>

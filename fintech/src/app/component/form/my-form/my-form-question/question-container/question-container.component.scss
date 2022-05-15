@@ -1,0 +1,20 @@
+@use "../../../../../../variable/style/mixin";
+
+.my-form-question-container .question-item-container {
+    @include mixin.width-height(700px, 400px);
+    @include mixin.flex(column, center, center);
+
+    margin: 0 auto;
+
+    app-question-template {
+        @include mixin.width-height(100%, auto);
+    }
+}
+
+.my-form-question-container .question-button-container {
+    @include mixin.flex(row, flex-end, center);
+
+    .next-button {
+        margin-left: 30px;
+    }
+}

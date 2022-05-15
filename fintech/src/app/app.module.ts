@@ -11,6 +11,10 @@ import { FormContainerItemComponent } from './component/form/overview/form-conta
 import { FormItemComponent } from './component/form/overview/form-item/form-item.component';
 import { MyFormContainerComponent } from './component/form/my-form/my-form-container/my-form-container.component';
 import { MyFormEntrepriseComponent } from './component/form/my-form/my-form-entreprise/my-form-entreprise.component';
+import { QuestionTemplateComponent } from './component/form/my-form/my-form-question/question-template/question-template.component';
+import { QuestionContainerComponent } from './component/form/my-form/my-form-question/question-container/question-container.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MyFormQuestionnaireComponent } from './component/form/my-form/my-form-questionnaire/my-form-questionnaire.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +26,15 @@ import { MyFormEntrepriseComponent } from './component/form/my-form/my-form-entr
     FormContainerItemComponent,
     FormItemComponent,
     MyFormContainerComponent,
-    MyFormEntrepriseComponent
+    MyFormEntrepriseComponent,
+    QuestionTemplateComponent,
+    QuestionContainerComponent,
+    MyFormQuestionnaireComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
