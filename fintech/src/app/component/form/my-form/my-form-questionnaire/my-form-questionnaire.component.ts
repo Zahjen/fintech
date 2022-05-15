@@ -17,12 +17,12 @@ export class MyFormQuestionnaireComponent implements OnInit {
 
   constructor(private qcs: QuestionControlService, private sharedFormData: SharedFormDataService) {}
 
-  ngOnInit() {
+  ngOnInit() : void {
     this.form = this.qcs.toFormGroup(this.questions as Question<string>[]);
   }
 
   // Méthode permettant de faire un passage de données d'un component à un autre
-  onSubmit() {
+  onSubmit() : void {
     this.sharedFormData.setQuestions(this.questions);
   }
 

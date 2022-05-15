@@ -9,7 +9,7 @@ export class FormItemComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() : void {
   }
   
   @Input() finishedFormInfo!: any;

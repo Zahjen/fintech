@@ -12,7 +12,7 @@ export class FormContainerItemComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() : void {
   }
 
 }

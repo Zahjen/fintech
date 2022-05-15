@@ -9,7 +9,7 @@ export class MyFormEntrepriseComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit() : void {
     
   }
 

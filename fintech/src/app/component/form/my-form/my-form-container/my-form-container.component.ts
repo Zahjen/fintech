@@ -15,7 +15,7 @@ export class MyFormContainerComponent implements OnInit {
   constructor(private questionService: QuestionService) {}
 
   // On appelle ici les questions 
-  ngOnInit(): void {
+  ngOnInit() : void {
     this.getQuestions();
   }
 

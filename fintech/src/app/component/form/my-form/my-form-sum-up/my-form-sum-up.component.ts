@@ -16,7 +16,7 @@ export class MyFormSumUpComponent implements OnInit {
 
   constructor(private qcs: QuestionControlService, private sharedFormData: SharedFormDataService) { }
 
-  ngOnInit(): void {
+  ngOnInit() : void {
     this.questions = this.sharedFormData.getQuestions();
     this.form = this.qcs.toFormGroup(this.questions as Question<string>[]);
   }
