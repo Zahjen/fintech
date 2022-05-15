@@ -16,6 +16,9 @@
                    </label>
                 </div>
 
+                <!-- Text -->
+                <input type="text" *ngSwitchCase="'text'" [name]="question.key" [placeholder]="placeholder" [formControlName]="question.key" class="question-answer-text" (change)="setValue()">
+
                 <!-- Dropdown list -->
                 <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue()">
                     <option *ngFor="let answer of question.answers" [value]="answer.key">

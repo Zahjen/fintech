@@ -12,12 +12,14 @@ import { Question } from 'src/model/question';
 export class MyFormSumUpComponent implements OnInit {
 
   questions!: Question<any>[];
+  questionEntreprise!: Question<any>;
   form!: FormGroup;
 
   constructor(private qcs: QuestionControlService, private sharedFormData: SharedFormDataService) { }
 
   ngOnInit() : void {
     this.questions = this.sharedFormData.getQuestions();
+    this.questionEntreprise = this.sharedFormData.getQuestionEntreprise();
     this.form = this.qcs.toFormGroup(this.questions as Question<string>[]);
   }
 

@@ -1,5 +1,5 @@
 export const addFormRoute = {
-    routeLink: '/component/form/my-form/my-form-container',
+    routeLink: '/component/form/my-form/my-form-entreprise',
     label: 'My Form'
 }
 

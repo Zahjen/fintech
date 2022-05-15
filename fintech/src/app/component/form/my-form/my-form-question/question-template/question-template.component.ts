@@ -11,6 +11,7 @@ export class QuestionTemplateComponent {
 
   @Input() question!: Question<string>;
   @Input() form!: FormGroup;
+  @Input() placeholder?: string;
 
   constructor() {}
 

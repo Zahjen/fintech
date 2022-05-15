@@ -7,6 +7,7 @@ import { Question } from 'src/model/question';
 })
 export class SharedFormDataService {
   questions!: Question<any>[];
+  questionEntreprise!: Question<any>;
 
   constructor() { }
 
@@ -19,4 +20,13 @@ export class SharedFormDataService {
   setQuestions(questions: Question<any>[]) : void {
     this.questions = questions;
   }
+
+  getQuestionEntreprise() : Question<any> {
+    return this.questionEntreprise;
+  }
+
+  setQuestionEntreprise(questionEntreprise: Question<any>) : void {
+    this.questionEntreprise = questionEntreprise;
+  }
+
 }

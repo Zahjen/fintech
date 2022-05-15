@@ -44,6 +44,20 @@
                 }
             }
 
+            .question-answer-text {
+                @include mixin.width-height(500px, auto);
+
+                border: none;
+                outline: none;
+                border-bottom: 2px solid color.$secondary;
+                font-size: 16px;
+                padding: 5px 0;
+
+                &::placeholder {
+                    color: color.$secondary;
+                }
+            }
+
             .question-answer-select-container {
                 @include mixin.width-height(500px, auto);
 

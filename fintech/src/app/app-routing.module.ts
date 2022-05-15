@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardContainerComponent } from './component/dashboad/dashboard-container/dashboard-container.component';
-import { MyFormContainerComponent } from './component/form/my-form/my-form-container/my-form-container.component';
+import { MyFormEntrepriseComponent } from './component/form/my-form/my-form-entreprise/my-form-entreprise.component';
+import { MyFormQuestionnaireComponent } from './component/form/my-form/my-form-questionnaire/my-form-questionnaire.component';
 import { MyFormSumUpComponent } from './component/form/my-form/my-form-sum-up/my-form-sum-up.component';
 import { FormContainerComponent } from './component/form/overview/form-container/form-container.component';
 
@@ -20,12 +21,16 @@ const routes: Routes = [
     component: FormContainerComponent
   },
   {
-    path: "component/form/my-form/my-form-container",
-    component: MyFormContainerComponent
+    path: "component/form/my-form/my-form-entreprise",
+    component: MyFormEntrepriseComponent
   },
   {
     path: "component/form/my-form/my-form-sum-up",
     component: MyFormSumUpComponent
+  },
+  {
+    path: "component/form/my-form/my-form-questionnaire",
+    component: MyFormQuestionnaireComponent
   },
 ];
 
