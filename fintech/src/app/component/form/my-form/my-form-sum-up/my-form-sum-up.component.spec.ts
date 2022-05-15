@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SumUpBodyComponent } from './sum-up-body.component';
+import { MyFormSumUpComponent } from './my-form-sum-up.component';
 
-describe('SumUpBodyComponent', () => {
-  let component: SumUpBodyComponent;
-  let fixture: ComponentFixture<SumUpBodyComponent>;
+describe('MyFormSumUpComponent', () => {
+  let component: MyFormSumUpComponent;
+  let fixture: ComponentFixture<MyFormSumUpComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SumUpBodyComponent ]
+      declarations: [ MyFormSumUpComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SumUpBodyComponent);
+    fixture = TestBed.createComponent(MyFormSumUpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,8 +18,8 @@
 
                 <!-- Dropdown list -->
                 <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue()">
-                    <option *ngFor="let opt of question.answers" [value]="opt.key">
-                        {{opt.value}}
+                    <option *ngFor="let answer of question.answers" [value]="answer.key">
+                        {{answer.value}}
                     </option>
                 </select>
         

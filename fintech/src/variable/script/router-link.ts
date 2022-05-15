@@ -4,6 +4,6 @@ export const addFormRoute = {
 }
 
 export const sumUpMyForm = {
-    routeLink: '/component/form/my-form/sum-up/sum-up-container',
+    routeLink: '/component/form/my-form/my-form-sum-up',
     label: 'Form Summary'
 }

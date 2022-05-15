@@ -1,0 +1,54 @@
+<h1>Form Summary</h1>
+
+<div class="sum-up-note">
+    Please note that you can still edit your answers.
+</div>
+
+<form (ngSubmit)="onSubmit()">
+
+    <div class="sum-up-border">
+        <div class="sum-up-container">
+            <div *ngFor="let question of questions" [formGroup]="form">
+                <div class="sum-up-item-container">
+                    
+                    <label class="question-description">{{ question.label }}</label>
+
+                    <div [ngSwitch]="question.controlType" class="question-answer-container">
+
+                        <!-- Radio Buttons -->
+                        <!-- WARNING : Il y a un ordre précis à respecter pour recuérer la valeur de l'input :') i.e. type -> name -> formControlName -> value -> classe -->
+                        <div *ngSwitchCase="'radio'" class="question-answer-radio-container">
+                        <label *ngFor="let answer of question.answers" class="question-answer-radio-item">
+                            <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer.key" [checked]="question.value == answer.key" class="question-answer-radio-input"> 
+                            <span> {{ answer.value }} </span>
+                        </label>
+                        </div>
+
+                        <!-- Dropdown list -->
+                        <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container">
+                            <option *ngFor="let answer of question.answers" [value]="answer.key" [selected]="question.value == answer.key">
+                                {{answer.value}}
+                            </option>
+                        </select>
+                
+                    </div>
+
+                    <div class="error-message" *ngIf="!isValid(question)">Please, this field is required</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+    <div class="confirming-container">
+        By clicking the submit button, you confirm the accuracy of the above provided information.
+        <br>
+        <br>
+        These information will be final and cannot be modified via this form.
+    </div>
+
+    <div class="submit-container">
+        <input type="submit" class="button-fill" value="Proceed Analysis">
+    </div>
+    
+</form>

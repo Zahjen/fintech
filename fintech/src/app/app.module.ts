@@ -15,8 +15,7 @@ import { QuestionTemplateComponent } from './component/form/my-form/my-form-ques
 import { QuestionContainerComponent } from './component/form/my-form/my-form-question/question-container/question-container.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyFormQuestionnaireComponent } from './component/form/my-form/my-form-questionnaire/my-form-questionnaire.component';
-import { SumUpBodyComponent } from './component/form/my-form/sum-up/sum-up-body/sum-up-body.component';
-import { SumUpContainerComponent } from './component/form/my-form/sum-up/sum-up-container/sum-up-container.component';
+import { MyFormSumUpComponent } from './component/form/my-form/my-form-sum-up/my-form-sum-up.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { SumUpContainerComponent } from './component/form/my-form/sum-up/sum-up-
     QuestionTemplateComponent,
     QuestionContainerComponent,
     MyFormQuestionnaireComponent,
-    SumUpBodyComponent,
-    SumUpContainerComponent
+    MyFormSumUpComponent
   ],
   imports: [
     BrowserModule,
