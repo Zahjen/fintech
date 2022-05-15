@@ -14,6 +14,11 @@ export class QuestionTemplateComponent {
 
   constructor() {}
 
+  // Méthode permettant de mettre à jour la valeur associée à une question selon la selection de l'utilisateur
+  setValue() : void {
+    this.question['value'] = this.form.controls[this.question.key].value;
+  }
+
   // Getter permettant de déterminer si le champ a bien été rempli, i.e. un bouton radio a bien été séléctionné, une option un select a été choisi, etc
   get isValid() { 
     return this.form.controls[this.question.key].valid; 

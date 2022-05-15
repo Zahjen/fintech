@@ -11,13 +11,13 @@
                 <!-- WARNING : Il y a un ordre précis à respecter pour recuérer la valeur de l'input :') i.e. type -> name -> formControlName -> value -> classe -->
                 <div *ngSwitchCase="'radio'" class="question-answer-radio-container">
                    <label *ngFor="let answer of question.answers" class="question-answer-radio-item">
-                        <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer.key" class="question-answer-radio-input"> 
-                        <span > {{ answer.value }} </span>
+                        <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer.key" class="question-answer-radio-input" (change)="setValue()"> 
+                        <span> {{ answer.value }} </span>
                    </label>
                 </div>
 
                 <!-- Dropdown list -->
-                <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container">
+                <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue()">
                     <option *ngFor="let opt of question.answers" [value]="opt.key">
                         {{opt.value}}
                     </option>

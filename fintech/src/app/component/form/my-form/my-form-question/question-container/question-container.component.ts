@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Question } from 'src/model/question';
+import { sumUpMyForm } from 'src/variable/script/router-link';
 
 @Component({
   selector: 'app-question-container',
@@ -13,6 +14,8 @@ export class QuestionContainerComponent {
   @Input() question!: Question<string>;
   @Input() questions!: Question<string>[];
   @Input() index!: number;  
+
+  sumUpMyForm = sumUpMyForm;
 
   constructor() {}
 

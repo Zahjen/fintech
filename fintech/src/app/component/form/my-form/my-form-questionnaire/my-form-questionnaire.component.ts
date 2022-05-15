@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { QuestionControlService } from 'src/app/services/question-control/question-control.service';
+import { SharedFormDataService } from 'src/app/services/shared-form-data/shared-form-data.service';
 import { Question } from 'src/model/question';
 
 @Component({
@@ -14,12 +15,15 @@ export class MyFormQuestionnaireComponent implements OnInit {
   
   form!: FormGroup;
 
-  constructor(private qcs: QuestionControlService) {}
+  constructor(private qcs: QuestionControlService, private sharedFormData: SharedFormDataService) {}
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions as Question<string>[]);
   }
 
-  onSubmit() {}
+  // Méthode permettant de faire un passage de données d'un component à un autre
+  onSubmit() {
+    this.sharedFormData.setQuestions(this.questions);
+  }
 
 }

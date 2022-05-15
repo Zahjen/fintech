@@ -9,7 +9,9 @@
 
 	<div class="question-button-container">
 		<button (click)="previousButton(index)" class="button-empty previous-button">Previous</button>
-		<button (click)="nextButton(index)" class="button-fill next-button">Next</button>
+		<!-- Si c'est la dernière question, le button Next nous amène alors vers le sum - up du formulaire -->
+		<button (click)="nextButton(index)" *ngIf="index < questions.length - 1" class="button-fill next-button">Next</button>
+		<a [routerLink]="sumUpMyForm.routeLink" *ngIf="index === questions.length - 1" class="button-fill next-button">Next</a>
 	</div>
 
 </div>
