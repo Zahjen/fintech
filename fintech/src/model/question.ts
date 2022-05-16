@@ -1,5 +1,7 @@
 // Notons que le T correspond a un type de données. Par exemple il peut s'agir d'un string, d'un int, d'un boolean, etc
 
+import { NumberValueAccessor } from "@angular/forms";
+
 // !: -> signifie qu'il y a obligation de définition
 // ?: -> signifie qu'il y a possibilité d'undefined
 export class Question<T> {
@@ -11,7 +13,7 @@ export class Question<T> {
     id: number;
     controlType: string;
     type: string;
-    answers: {key: string, value: string}[];
+    answers: {key: string, points: number, value: string}[];
   
     constructor(options: {
         value?: T; 
@@ -22,7 +24,7 @@ export class Question<T> {
         id?: number; 
         controlType?: string; 
         type?: string; 
-        answers?: {key: string, value: string}[]
+        answers?: {key: string, points: number, value: string}[]
     } = {}) {
         this.value = options.value;
         this.key = options.key || '';
