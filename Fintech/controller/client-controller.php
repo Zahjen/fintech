@@ -1,6 +1,6 @@
 <?php
 
-class QuestionController {
+class ClientController {
 
     // --------------------
     // Déclaration des attributs
@@ -8,18 +8,18 @@ class QuestionController {
 
     private $db;
     private $request_method;
-    private $id_question;
-    private $question_manager;
+    private $id_client;
+    private $client_manager;
 
     // --------------------
     // Constructeur
     // --------------------
 
-    public function __construct($db, $request_method, $id_question) {
+    public function __construct($db, $request_method, $id_client) {
         $this->db = $db;
         $this->request_method = $request_method;
-        $this->id_question = $id_question;
-        $this->question_manager = new QuestionManager($db);
+        $this->id_client = $id_client;
+        $this->client_manager = new ClientManager($db);
     }
 
     // --------------------
@@ -31,8 +31,8 @@ class QuestionController {
 
         switch ($this->request_method) {
             case 'GET':
-                if ($this->id_question) {
-                    $response = $this->get_by_id($this->id_question);
+                if ($this->id_client) {
+                    $response = $this->get_by_id($this->id_client);
                 } else {
                     $response = $this->get_all();
                 };
@@ -43,11 +43,11 @@ class QuestionController {
                 break;
 
             case 'PUT':
-                $response = $this->update($this->id_question);
+                $response = $this->update($this->id_client);
                 break;
 
             case 'DELETE':
-                $response = $this->delete($this->id_question);
+                $response = $this->delete($this->id_client);
                 break;
 
             default:
@@ -63,46 +63,46 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de récupérer toutes les questions 
+    // Méthode permettant de récupérer tous les clients 
     private function get_all() {
 
-        $questions = $this->question_manager->getAll();
+        $clients = $this->client_manager->getAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
 
         header('Content-type: application/json');
 
-        $response['body'] = json_encode($questions);
+        $response['body'] = json_encode($clients);
 
         return $response;
 
     }
 
-    // Méthode permettant de récupérer une question selon son id
+    // Méthode permettant de récupérer un client selon son id
     private function get_by_id($id) {
 
-        $question = $this->question_manager->getById($id);
+        $client = $this->client_manager->getById($id);
 
-        if (!$question) {
+        if (!$client) {
             return $this->not_found_query();
         }
 
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($question);
+        $response['body'] = json_encode($client);
 
         return $response;
 
     }
 
-    // Méthode permettant d'insérer une question dans la base de données
+    // Méthode permettant d'insérer un client dans la base de données
     private function insert() {
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_question_valid($input)) {
+        if (!$this->is_client_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->question_manager->insert($input);
+        $this->client_manager->insert($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
@@ -110,22 +110,22 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de mettre à jour une question selon son id
+    // Méthode permettant de mettre à jour un client selon son id
     private function update($id) {
 
-        $question = $this->question_manager->getById($id);
+        $client = $this->client_manager->getById($id);
 
-        if (!$question) {
+        if (! $client) {
             return $this->not_found_query();
         }
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_question_valid($input)) {
+        if (!$this->is_client_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->question_manager->update($input);
+        $this->client_manager->update($input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -133,16 +133,16 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de supprimer une question selon son id
+    // Méthode permettant de supprimer un client selon son id
     private function delete($id) {
 
-        $question = $this->question_manager->getById($id);
+        $client = $this->client_manager->getById($id);
 
-        if (!$question) {
+        if (!$client) {
             return $this->not_found_query();
         }
 
-        $this->question_manager->delete($question);
+        $this->client_manager->delete($client);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -150,10 +150,10 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de vérifier qu'une question est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
-    private function is_question_valid($input) {
+    // Méthode permettant de vérifier qu'un client est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
+    private function is_client_valid($input) {
 
-        return isset($input['labelQuestion']) && isset($input['type']) && isset($input['idCategorie']);
+        return isset($input['nomClient']) && isset($input['adresse']) && isset($input['codePostal']) && isset($input['ville']) && isset($input['idPays']);
 
     }
 

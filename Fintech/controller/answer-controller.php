@@ -1,6 +1,6 @@
 <?php
 
-class QuestionController {
+class AnswerController {
 
     // --------------------
     // Déclaration des attributs
@@ -8,18 +8,18 @@ class QuestionController {
 
     private $db;
     private $request_method;
-    private $id_question;
-    private $question_manager;
+    private $id_answer;
+    private $answer_manager;
 
     // --------------------
     // Constructeur
     // --------------------
 
-    public function __construct($db, $request_method, $id_question) {
+    public function __construct($db, $request_method, $id_answer) {
         $this->db = $db;
         $this->request_method = $request_method;
-        $this->id_question = $id_question;
-        $this->question_manager = new QuestionManager($db);
+        $this->id_answer = $id_answer;
+        $this->answer_manager = new ReponseManager($db);
     }
 
     // --------------------
@@ -31,8 +31,8 @@ class QuestionController {
 
         switch ($this->request_method) {
             case 'GET':
-                if ($this->id_question) {
-                    $response = $this->get_by_id($this->id_question);
+                if ($this->id_answer) {
+                    $response = $this->get_by_id($this->id_answer);
                 } else {
                     $response = $this->get_all();
                 };
@@ -43,11 +43,11 @@ class QuestionController {
                 break;
 
             case 'PUT':
-                $response = $this->update($this->id_question);
+                $response = $this->update($this->id_answer);
                 break;
 
             case 'DELETE':
-                $response = $this->delete($this->id_question);
+                $response = $this->delete($this->id_answer);
                 break;
 
             default:
@@ -63,46 +63,46 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de récupérer toutes les questions 
+    // Méthode permettant de récupérer toutes les réponses 
     private function get_all() {
 
-        $questions = $this->question_manager->getAll();
+        $answers = $this->answer_manager->getAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
 
         header('Content-type: application/json');
 
-        $response['body'] = json_encode($questions);
+        $response['body'] = json_encode($answers);
 
         return $response;
 
     }
 
-    // Méthode permettant de récupérer une question selon son id
+    // Méthode permettant de récupérer une réponse selon son id
     private function get_by_id($id) {
 
-        $question = $this->question_manager->getById($id);
+        $answer = $this->answer_manager->getById($id);
 
-        if (!$question) {
+        if (!$answer) {
             return $this->not_found_query();
         }
 
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($question);
+        $response['body'] = json_encode($answer);
 
         return $response;
 
     }
 
-    // Méthode permettant d'insérer une question dans la base de données
+    // Méthode permettant d'insérer une réponse dans la base de données
     private function insert() {
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_question_valid($input)) {
+        if (!$this->is_answer_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->question_manager->insert($input);
+        $this->answer_manager->insert($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
@@ -110,22 +110,22 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de mettre à jour une question selon son id
+    // Méthode permettant de mettre à jour une réponse selon son id
     private function update($id) {
 
-        $question = $this->question_manager->getById($id);
+        $answer = $this->answer_manager->getById($id);
 
-        if (!$question) {
+        if (! $answer) {
             return $this->not_found_query();
         }
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_question_valid($input)) {
+        if (!$this->is_answer_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->question_manager->update($input);
+        $this->answer_manager->update($input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -133,16 +133,16 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de supprimer une question selon son id
+    // Méthode permettant de supprimer une réponse selon son id
     private function delete($id) {
 
-        $question = $this->question_manager->getById($id);
+        $answer = $this->answer_manager->getById($id);
 
-        if (!$question) {
+        if (!$answer) {
             return $this->not_found_query();
         }
 
-        $this->question_manager->delete($question);
+        $this->answer_manager->delete($answer);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -150,10 +150,10 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de vérifier qu'une question est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
-    private function is_question_valid($input) {
+    // Méthode permettant de vérifier qu'une réponse est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
+    private function is_answer_valid($input) {
 
-        return isset($input['labelQuestion']) && isset($input['type']) && isset($input['idCategorie']);
+        return isset($input['labelReponse']);
 
     }
 

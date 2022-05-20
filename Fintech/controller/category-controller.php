@@ -1,6 +1,6 @@
 <?php
 
-class QuestionController {
+class CategoryController {
 
     // --------------------
     // Déclaration des attributs
@@ -8,18 +8,18 @@ class QuestionController {
 
     private $db;
     private $request_method;
-    private $id_question;
-    private $question_manager;
+    private $id_category;
+    private $category_manager;
 
     // --------------------
     // Constructeur
     // --------------------
 
-    public function __construct($db, $request_method, $id_question) {
+    public function __construct($db, $request_method, $id_category) {
         $this->db = $db;
         $this->request_method = $request_method;
-        $this->id_question = $id_question;
-        $this->question_manager = new QuestionManager($db);
+        $this->id_category = $id_category;
+        $this->category_manager = new CategorieManager($db);
     }
 
     // --------------------
@@ -31,8 +31,8 @@ class QuestionController {
 
         switch ($this->request_method) {
             case 'GET':
-                if ($this->id_question) {
-                    $response = $this->get_by_id($this->id_question);
+                if ($this->id_category) {
+                    $response = $this->get_by_id($this->id_category);
                 } else {
                     $response = $this->get_all();
                 };
@@ -43,11 +43,11 @@ class QuestionController {
                 break;
 
             case 'PUT':
-                $response = $this->update($this->id_question);
+                $response = $this->update($this->id_category);
                 break;
 
             case 'DELETE':
-                $response = $this->delete($this->id_question);
+                $response = $this->delete($this->id_category);
                 break;
 
             default:
@@ -63,46 +63,46 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de récupérer toutes les questions 
+    // Méthode permettant de récupérer toutes les catégories 
     private function get_all() {
 
-        $questions = $this->question_manager->getAll();
+        $categories = $this->category_manager->getAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
 
         header('Content-type: application/json');
 
-        $response['body'] = json_encode($questions);
+        $response['body'] = json_encode($categories);
 
         return $response;
 
     }
 
-    // Méthode permettant de récupérer une question selon son id
+    // Méthode permettant de récupérer une catégorie selon son id
     private function get_by_id($id) {
 
-        $question = $this->question_manager->getById($id);
+        $category = $this->category_manager->getById($id);
 
-        if (!$question) {
+        if (!$category) {
             return $this->not_found_query();
         }
 
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($question);
+        $response['body'] = json_encode($category);
 
         return $response;
 
     }
 
-    // Méthode permettant d'insérer une question dans la base de données
+    // Méthode permettant d'insérer une catégorie dans la base de données
     private function insert() {
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_question_valid($input)) {
+        if (!$this->is_category_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->question_manager->insert($input);
+        $this->category_manager->insert($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
@@ -110,22 +110,22 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de mettre à jour une question selon son id
+    // Méthode permettant de mettre à jour une catégorie selon son id
     private function update($id) {
 
-        $question = $this->question_manager->getById($id);
+        $category = $this->category_manager->getById($id);
 
-        if (!$question) {
+        if (! $category) {
             return $this->not_found_query();
         }
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_question_valid($input)) {
+        if (!$this->is_category_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->question_manager->update($input);
+        $this->category_manager->update($input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -133,16 +133,16 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de supprimer une question selon son id
+    // Méthode permettant de supprimer une catégorie selon son id
     private function delete($id) {
 
-        $question = $this->question_manager->getById($id);
+        $category = $this->category_manager->getById($id);
 
-        if (!$question) {
+        if (!$category) {
             return $this->not_found_query();
         }
 
-        $this->question_manager->delete($question);
+        $this->category_manager->delete($category);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -150,10 +150,10 @@ class QuestionController {
 
     }
 
-    // Méthode permettant de vérifier qu'une question est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
-    private function is_question_valid($input) {
+    // Méthode permettant de vérifier qu'une catégorie est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
+    private function is_category_valid($input) {
 
-        return isset($input['labelQuestion']) && isset($input['type']) && isset($input['idCategorie']);
+        return isset($input['labelCategorie']);
 
     }
 
