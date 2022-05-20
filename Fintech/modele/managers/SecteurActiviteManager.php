@@ -1,5 +1,5 @@
 <?php
-    class secteurManager {
+    class SecteurActiviteManager {
 
         // attributs
         private $bdd;
