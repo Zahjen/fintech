@@ -7,6 +7,7 @@
         private $idQuestion; 
         private $labelQuestion;
         private $type;
+        private $idCategorie;
 
         // -------------------------------------------------
         // getters
@@ -19,6 +20,9 @@
         public function getType(){
             return $this->type;
         }
+        public function getIdCategorie() {
+            return $this->idCategorie;
+        }
         
         // -------------------------------------------------
         // setters 
@@ -30,6 +34,9 @@
         }
         public function setType($type){
             $this->type = $type;
+        }
+        public function setIdCategorie($idCategorie) {
+            $this->idCategorie = $idCategorie;
         }
         
         // -------------------------------------------------
@@ -49,7 +56,8 @@
             $json = [
                 'idQuestion' => $this->getIdQuestion(),
                 'labelQuestion' => $this->getLabelQuestion(),
-                'type' => $this->getType()
+                'type' => $this->getType(),
+                'idCategorie' => $this->getIdCategorie()
             ];
             return $json;
         }

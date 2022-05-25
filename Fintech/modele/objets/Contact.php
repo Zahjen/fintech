@@ -11,6 +11,7 @@
         private $password;
         private $idClient; // clef étrangère
         private $isAdmin;
+        private $isFirstConnection;
     
         // -------------------------------------------------
         // getters
@@ -34,6 +35,9 @@
         }
         public function getIsAdmin() {
             return $this->isAdmin;
+        }
+        public function getIsFirstConnection() {
+            return $this->isFirstConnection;
         }
         
         // -------------------------------------------------
@@ -59,6 +63,9 @@
         public function setIsAdmin($isAdmin){
             $this->isAdmin = $isAdmin;
         }
+        public function setIsFirstConnection($isFirstConnection){
+            $this->isFirstConnection = $isFirstConnection;
+        }
 
         // -------------------------------------------------
         // hydrate
@@ -81,7 +88,8 @@
                 'mail' => $this->getMail(),
                 'password' => $this->getPassword(),
                 'idClient' => $this->getIdClient(),
-                'isAdmin' => $this->getIsAdmin()
+                'isAdmin' => $this->getIsAdmin(),
+                'isFirstConnection' => $this->getIsFirstConnection()
             ];
             return $json;
         }
