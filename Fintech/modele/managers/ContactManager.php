@@ -20,7 +20,7 @@
             $monContact = null;
             try {
                 $id = (int)$id;
-                $req = $this->bdd->prepare('SELECT idContact,nomContact,tel,mail,password,idClient,isAdmin FROM contact WHERE idContact = ?');
+                $req = $this->bdd->prepare('SELECT idContact,nomContact,tel,mail,password,idClient,isAdmin, isFirstConnection FROM contact WHERE idContact = ?');
                 $req->execute(array($id));
                 $donnees = $req->fetch(PDO::FETCH_ASSOC);
                 $monContact = new Contact();
@@ -34,7 +34,7 @@
         public function getAll() {
             $listeContacts = [];
             try {
-                $req = $this->bdd->prepare( 'SELECT idContact,nomContact,tel,mail,password,idClient,isAdmin FROM contact');
+                $req = $this->bdd->prepare( 'SELECT idContact,nomContact,tel,mail,password,idClient,isAdmin, isFirstConnection FROM contact');
                 $req->execute();
                 while ($donnees = $req->fetch(PDO::FETCH_ASSOC)) {
                     $contact = new Contact();
@@ -50,13 +50,14 @@
         public function add(Contact $contact){
             if ($this->isAlreadyExist($contact) === false){
                 try {
-                    $req = $this->bdd->prepare(' INSERT INTO contact(nomContact,tel,mail,password,idClient,isAdmin) VALUES(:nomContact,:tel,:mail,:password,:idClient,:isAdmin) ');
+                    $req = $this->bdd->prepare(' INSERT INTO contact(nomContact,tel,mail,password,idClient,isAdmin, isFirstConnection) VALUES(:nomContact,:tel,:mail,:password,:idClient,:isAdmin) ');
                     $req->bindValue(':nomContact', $contact->getNomContact(), PDO::PARAM_STR);
                     $req->bindValue(':tel', $contact->getTel(), PDO::PARAM_STR);
                     $req->bindValue(':mail', $contact->getMail(), PDO::PARAM_STR);
                     $req->bindValue(':password', $contact->getPassword(), PDO::PARAM_STR);
                     $req->bindValue(':idClient', $contact->getIdClient(), PDO::PARAM_INT);
                     $req->bindValue(':isAdmin', $contact->getIsAdmin());
+                    $req->bindValue(':isFirstConnection', $contact->getIsFirstConnection());
                     $req->execute();
                     return true;
                 } catch (Exception $erreur) {
@@ -80,7 +81,7 @@
 
         public function update(Contact $contact) {
             try {
-                $req = $this->bdd->prepare( 'UPDATE contact SET nomContact = :nomContact, tel = :tel, mail = :mail, password= :password, idClient = :idClient, isAdmin = :isAdmin WHERE idContact = :id');
+                $req = $this->bdd->prepare( 'UPDATE contact SET nomContact = :nomContact, tel = :tel, mail = :mail, password= :password, idClient = :idClient, isAdmin = :isAdmin, isFirstConnection = :isFirstConnection WHERE idContact = :id');
                 $req->bindValue(':id', $contact->getIdContact(), PDO::PARAM_INT);
                 $req->bindValue(':nomContact', $contact->getNomContact(), PDO::PARAM_STR);
                 $req->bindValue(':tel', $contact->getTel(), PDO::PARAM_STR);
@@ -88,6 +89,7 @@
                 $req->bindValue(':password', $contact->getPassword(), PDO::PARAM_STR);
                 $req->bindValue(':idClient', $contact->getIdClient());
                 $req->bindValue(':isAdmin', $contact->getIsAdmin());
+                $req->bindValue(':isFirstConnection', $contact->getIsFirstConnection());
                 $req->execute();
             } catch (Exception $erreur) {
                 die('Erreur : '.$erreur->getMessage());
