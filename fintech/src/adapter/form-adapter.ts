@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Adapter } from "src/app/interfaces/adapter";
+import { IAdaptedForm } from "src/app/interfaces/object-adapted/form-adapted";
 import { Form } from "src/model/form";
 
 @Injectable({
@@ -10,13 +11,16 @@ export class FormAdapter implements Adapter<Form> {
 
     constructor() {}
 
-    adapt(form: any, labelThirdParty: string): Form {
+    adapt(form: IAdaptedForm): Form {
         return new Form({
-            id: form.idform,
+            id: form.idForm,
             idClient: form.idClient,
-            idThirdParty: form.idPrestataire,
-            labelThirdParty: labelThirdParty,
-            idBuisnessLine: form.idSecteur,
+            idThirdParty: form.thirdParty.idPrestataire,
+            labelThirdParty: form.thirdParty.nomPrestataire,
+            idBuisnessLine: form.buisnessLine.idSecteur,
+            labelBuisnessLine: form.buisnessLine.labelSecteur,
+            idCountry: form.country.idPays,
+            labelCountry: form.country.nomPays,
             totalPoint: form.totalPoints
         });
     }

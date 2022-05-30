@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Dao } from 'src/app/interfaces/dao';
+import { IAdaptedForm } from 'src/app/interfaces/object-adapted/form-adapted';
 import { IForm } from 'src/app/interfaces/object-from-api/form';
 
 @Injectable({
@@ -25,9 +26,9 @@ export class FormService implements Dao<IForm> {
             .get<IForm[]>(this.urlBase + `${id}`);
     }  
 
-    // Méthode permettant de récupérer un ensemble de formulaire grâce à l'id du client en consommant l'api REST
-    getFormByIdClient(idClient: number) : Observable<IForm[]> {
+    // Méthode permettant de récupérer un ensemble de formulaire adapté grâce à l'id du client en consommant l'api REST
+    getFormByIdClient(idClient: number) : Observable<IAdaptedForm[]> {
         return this.httpClient
-          .get<IForm[]>(this.urlBase + `client` + '/' + `${idClient}`);
+          .get<IAdaptedForm[]>(this.urlBase + `adapt` + '/' + `${idClient}`);
       }
 }

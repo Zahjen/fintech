@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { FormAdapter } from 'src/adapter/form-adapter';
+import { IAdaptedForm } from 'src/app/interfaces/object-adapted/form-adapted';
+import { IForm } from 'src/app/interfaces/object-from-api/form';
 import { Form } from 'src/model/form';
 import { FormService } from '../../data-from-api/form/form.service';
 import { ThirdPartyService } from '../../data-from-api/third-party/third-party.service';
@@ -12,40 +14,21 @@ export class FormAdaptedService {
 
   constructor(
     private formService: FormService,
-    private thirdPartyService: ThirdPartyService,
     private formAdapter: FormAdapter
   ) {}
 
 
-  // Je n'aime pas comment j'ai développé cette méthode dû au fait que l'on doit connaître les id des dropdown :/ 
-  // Je dois voir comment faire pour automatiser cela
+  // Méthode permettant de récupérer et d'adapter les formulaires d'un client grace à son id
   getFormByIdClient(idClient: number) : Observable<Form[]> {
-      const forms: Form[] = [];
-      // Subject va nous permettre de manipuler (adapter nos données dans nos différents objets) et sauvegarder ces données
-      let subject = new Subject<Form[]>();
-
-      this.formService
-          // On récupère l'ensemble de formulaires de la base de données
-          .getFormByIdClient(idClient)
-          .subscribe((formsList) => {
-              // Pour chaque formulaire de l'ensemble de formulaire ...
-              formsList.forEach((form: any) => {
-                  this.thirdPartyService
-                    // ... on récupère le prestataire concerné par le formulaire via son id
-                    .getById(form.idPrestataire)
-                    .subscribe((thirdParty) =>{
-                      forms.push(
-                        this.formAdapter.adapt(form, thirdParty.nomPrestataire)
-                      )
-
-                      // On enregistre en quelque sorte le tableau de formulaires obtenues
-                      subject.next(forms);
-                  });
-              });
+    return this.formService
+      .getFormByIdClient(idClient)
+      .pipe(
+        map((forms: IAdaptedForm[]) => {
+          return forms.map((form: IAdaptedForm) => {
+            return this.formAdapter.adapt(form);
           })
-          
-          // On retourne un Observable de tableau d'objets Form
-        return subject.asObservable();
-    }
+        })
+      )
+  }
 
 }
