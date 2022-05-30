@@ -1,5 +1,19 @@
 @use "../../../../../variable/style/mixin";
+@use "../../../../../variable/style/color";
+
+.paginator-control-container {
+    @include mixin.flex(row, center, center);
+}
 
 app-form-item {
     @include mixin.width-height(100%, auto);
+}
+
+.item-container {
+    margin-top: 50px;
+}
+
+.pagination-control-form-item ::ng-deep .ngx-pagination .current {
+    background-color: color.$secondary;
+    color: color.$black;
 }

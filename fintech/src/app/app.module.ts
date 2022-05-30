@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,12 +11,21 @@ import { DashboardContainerComponent } from './component/dashboad/dashboard-cont
 import { FormContainerComponent } from './component/form/overview/form-container/form-container.component';
 import { FormContainerItemComponent } from './component/form/overview/form-container-item/form-container-item.component';
 import { FormItemComponent } from './component/form/overview/form-item/form-item.component';
-import { MyFormEntrepriseComponent } from './component/form/my-form/my-form-entreprise/my-form-entreprise.component';
 import { QuestionTemplateComponent } from './component/form/my-form/my-form-question/question-template/question-template.component';
 import { QuestionContainerComponent } from './component/form/my-form/my-form-question/question-container/question-container.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyFormQuestionnaireComponent } from './component/form/my-form/my-form-questionnaire/my-form-questionnaire.component';
 import { MyFormSumUpComponent } from './component/form/my-form/my-form-sum-up/my-form-sum-up.component';
+import { SearchFilterPipe } from './pipe/search-filter/search-filter.pipe';
+import { MyFormQuestionnaireContainerComponent } from './component/form/my-form/my-form-questionnaire-container/my-form-questionnaire-container/my-form-questionnaire-container.component';
+import { ResultContainerComponent } from './component/result/result-container/result-container.component';
+import { ResultUserOpinionComponent } from './component/result/result-user-opinion/result-user-opinion.component';
+import { ResultAnalysisComponent } from './component/result/result-analysis/result-analysis.component';
+import { FormDetailContainerComponent } from './component/form/detail/form-detail-container/form-detail-container.component';
+import { MyFormThirdPartyContainerComponent } from './component/form/my-form/my-form-third-party/my-form-third-party-container/my-form-third-party-container.component';
+import { MyFormThirdPartyContentComponent } from './component/form/my-form/my-form-third-party/my-form-third-party-content/my-form-third-party-content.component';
+import { ThirdPartyContainerComponent } from './component/third-party/third-party-container/third-party-container.component';
+import { ThirdPartyContentComponent } from './component/third-party/third-party-content/third-party-content.component';
 
 @NgModule({
   declarations: [
@@ -26,17 +36,27 @@ import { MyFormSumUpComponent } from './component/form/my-form/my-form-sum-up/my
     FormContainerComponent,
     FormContainerItemComponent,
     FormItemComponent,
-    MyFormEntrepriseComponent,
     QuestionTemplateComponent,
     QuestionContainerComponent,
     MyFormQuestionnaireComponent,
-    MyFormSumUpComponent
+    SearchFilterPipe,
+    MyFormQuestionnaireContainerComponent,
+    MyFormSumUpComponent,
+    ResultContainerComponent,
+    ResultUserOpinionComponent,
+    ResultAnalysisComponent,
+    FormDetailContainerComponent,
+    MyFormThirdPartyContainerComponent,
+    MyFormThirdPartyContentComponent,
+    ThirdPartyContainerComponent,
+    ThirdPartyContentComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

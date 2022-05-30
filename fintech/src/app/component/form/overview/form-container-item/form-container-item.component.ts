@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { finishedFormInfo } from 'src/variable/script/finished-form-info';
+import { Component, Input, OnInit } from '@angular/core';
+import { Form } from 'src/model/form';
 
 @Component({
   selector: 'app-form-container-item',
@@ -8,11 +8,19 @@ import { finishedFormInfo } from 'src/variable/script/finished-form-info';
 })
 export class FormContainerItemComponent implements OnInit {
 
-  finishedFormInfo = finishedFormInfo;
+  @Input() forms!: Form[];
+
+  page = 1;
+  count = 0;
+  pageSize = 5;
 
   constructor() { }
 
   ngOnInit() : void {
+  }
+
+  handlePageChange(event: any): void {
+    this.page = event;
   }
 
 }

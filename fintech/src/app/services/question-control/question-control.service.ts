@@ -10,8 +10,8 @@ export class QuestionControlService {
   constructor() { }
 
   // Méthode permettant de gérer les controles à effectuer sur un champ.
-  // Plus précisément on va prendre un ensemble de questions, et pour chacune de celle - ci on va considérer le fait que le champ soit requis ou non. Si celui - ci est requis alors on applique une vérification, sinon, on applique un champ vide ç la valeur du champ.
-  toFormGroup(questions: Question<string>[] ) {
+  // Plus précisément on va prendre un ensemble de questions, et pour chacune de celle - ci on va considérer le fait que le champ soit requis ou non. Si celui - ci est requis alors on applique une vérification, sinon, on n'applique pas de validteur, et lme champ peut être vide.
+  toFormGroup(questions: Question<string>[]) : FormGroup {
     const group: any = {};
 
     questions.forEach(question => {
@@ -23,5 +23,5 @@ export class QuestionControlService {
     return new FormGroup(group);
   }
 
-  
 }
+

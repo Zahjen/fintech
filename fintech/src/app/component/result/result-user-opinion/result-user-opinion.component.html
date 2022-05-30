@@ -1,0 +1,59 @@
+<h3 class="subtitle-opinion">
+    Your opinion matters
+</h3>
+
+<form action="" (ngSubmit)="onSubmit()" [formGroup]="form">
+<!--
+    <div class="question-agree-container">
+        <div class="question-description">
+            Do you agree with the result of the analysis ?
+        </div>
+        
+        <div class="question-answer-radio-container">
+            <label class="question-answer-radio-item">
+                <input type="radio" name="user-agree" value="yes" class="question-answer-radio-input"> 
+                <span> Yes </span>
+            </label>
+
+            <label class="question-answer-radio-item">
+                <input type="radio" name="user-agree" value="no" class="question-answer-radio-input"> 
+                <span> No </span>
+            </label>
+        </div>
+
+        
+    </div>-->
+
+    <div class="question-opinion-container opinion">
+        <div class="question-description">
+            According to you, what is the inehrent risk related to the company you have chosen ?
+        </div>
+        
+        <div class="question-answer-radio-container">
+            <label class="question-answer-radio-item">
+                <input type="radio" name="user-opinion" value="low" class="question-answer-radio-input"> 
+                <span> Low </span>
+            </label>
+
+            <label class="question-answer-radio-item">
+                <input type="radio" name="user-opinion" value="medium" class="question-answer-radio-input"> 
+                <span> Medium </span>
+            </label>
+
+            <label class="question-answer-radio-item">
+                <input type="radio" name="user-opinion" value="high" class="question-answer-radio-input"> 
+                <span> High </span>
+            </label>
+
+            <label class="question-answer-radio-item">
+                <input type="radio" name="user-opinion" value="critical4" class="question-answer-radio-input"> 
+                <span> Critical </span>
+            </label>
+        </div>
+    </div>
+
+    <div class="opinion-button-container">
+        <input type="submit" value="Continue" class="button-fill">
+    </div> 
+
+</form>

@@ -1,19 +1,16 @@
 <div class="item">
-    <div class="item-text item-entreprise">
-        {{ finishedFormInfo.entrepriseName }}
-    </div>
-    <div class="item-text item-date">
-        {{ finishedFormInfo.date }}
+    <div class="item-text item-third-party">
+        {{ form.labelThirdParty }}
     </div>
     <div class="item-text item-status">
         <span class="item-status-label">
             Status inherent risk: 
         </span>
-        <span class="item-status-data">
-            {{ finishedFormInfo.ineherentRisk }}
-        </span>
+        <strong class="item-status-data">
+            {{ inherentRisk(form.totalPoint) }}
+        </strong>
     </div>
-    <a class="item-read-more button-card">
+    <a [routerLink]="formDetailItem.routeLink" class="item-read-more button-card" (click)="sendForm()">
         Read More
     </a>
 </div>

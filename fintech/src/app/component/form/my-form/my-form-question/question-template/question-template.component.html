@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="question-template-container">
-    
+
     <div class="question-template-item-container" [formGroup]="form">
 
         <label class="question-description">{{ question.label }}</label>
@@ -10,27 +10,31 @@
                 <!-- Radio Buttons -->
                 <!-- WARNING : Il y a un ordre précis à respecter pour recuérer la valeur de l'input :') i.e. type -> name -> formControlName -> value -> classe -->
                 <div *ngSwitchCase="'radio'" class="question-answer-radio-container">
-                   <label *ngFor="let answer of question.answers" class="question-answer-radio-item">
-                        <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer.key" class="question-answer-radio-input" (change)="setValue()"> 
+                    <label *ngFor="let answer of answers" class="question-answer-radio-item">
+                        <input type="radio" class="question-answer-radio-input" [name]="question.key"
+                            [formControlName]="question.key" [value]="answer.key"
+                            (change)="setValue(); setObtainedPoints(answer.point)">
                         <span> {{ answer.value }} </span>
-                   </label>
+                    </label>
                 </div>
 
                 <!-- Text -->
-                <input type="text" *ngSwitchCase="'text'" [name]="question.key" [placeholder]="placeholder" [formControlName]="question.key" class="question-answer-text" (change)="setValue()">
+                <input type="text" *ngSwitchCase="'text'" [name]="question.key" [placeholder]="placeholder"
+                    [formControlName]="question.key" class="question-answer-text" (change)="setValue()">
 
-                <!-- Dropdown list -->
+                <!-- Dropdown list  -->
                 <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue()">
-                    <option *ngFor="let answer of question.answers" [value]="answer.key">
+                    <option *ngFor="let answer of answers" [value]="answer.key" (change)="setObtainedPoints(answer.point)">
                         {{answer.value}}
                     </option>
                 </select>
-        
+
             </div>
         </div>
 
     </div>
 
     <div class="error-message" *ngIf="!isValid">Please, this field is required</div>
+    <!---->
 
 </div>

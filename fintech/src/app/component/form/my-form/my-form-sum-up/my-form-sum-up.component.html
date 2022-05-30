@@ -1,34 +1,34 @@
 <h1>Form Summary</h1>
 
-<div class="">Compagny Name : {{ questionEntreprise.value }}.</div> 
+<div class="">Company Name : {{ chosenThirdParty.label }}.</div> 
 
 <div class="sum-up-note">
     Please note that you can still edit the following answers.
 </div>
 
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
 
     <div class="sum-up-border">
         <div class="sum-up-container">
             <div *ngFor="let question of questions" [formGroup]="form">
+                
                 <div class="sum-up-item-container">
                     
                     <label class="question-description">{{ question.label }}</label>
 
                     <div [ngSwitch]="question.controlType" class="question-answer-container">
-
                         <!-- Radio Buttons -->
                         <!-- WARNING : Il y a un ordre précis à respecter pour recuérer la valeur de l'input :') i.e. type -> name -> formControlName -> value -> classe -->
                         <div *ngSwitchCase="'radio'" class="question-answer-radio-container">
-                        <label *ngFor="let answer of question.answers" class="question-answer-radio-item">
-                            <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer.key" [checked]="question.value == answer.key" class="question-answer-radio-input"> 
+                        <label *ngFor="let answer of question.answersLoaded" class="question-answer-radio-item">
+                            <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer.key" [checked]="question.value == answer.key" class="question-answer-radio-input" (change)="setValue(question); setObtainedPoints(question, answer.point)"> 
                             <span> {{ answer.value }} </span>
                         </label>
                         </div>
 
                         <!-- Dropdown list -->
-                        <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container">
-                            <option *ngFor="let answer of question.answers" [value]="answer.key" [selected]="question.value == answer.key">
+                        <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(question)">
+                            <option *ngFor="let answer of question.answersLoaded" [value]="answer.key" [selected]="question.value == answer.key">
                                 {{answer.value}}
                             </option>
                         </select>
@@ -40,7 +40,6 @@
             </div>
         </div>
     </div>
-        
 
     <div class="confirming-container">
         By clicking the submit button, you confirm the accuracy of the above provided information.
@@ -50,7 +49,9 @@
     </div>
 
     <div class="submit-container">
-        <input type="submit" class="button-fill" value="Proceed Analysis">
+        <button class="button-fill" type="submit" value="Proceed Analysis">
+            Proceed Analysis
+        </button>
     </div>
     
 </form>

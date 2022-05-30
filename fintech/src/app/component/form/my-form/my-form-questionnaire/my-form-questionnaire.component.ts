@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { QuestionControlService } from 'src/app/services/question-control/question-control.service';
-import { QuestionService } from 'src/app/services/question/question.service';
 import { SharedFormDataService } from 'src/app/services/shared-form-data/shared-form-data.service';
 import { Question } from 'src/model/question';
 
@@ -12,29 +11,35 @@ import { Question } from 'src/model/question';
 })
 export class MyFormQuestionnaireComponent implements OnInit {
 
-  questions: Question<any>[] = [];
-  
+  @Input() questions!: Question<string>[];
   form!: FormGroup;
 
   constructor(
-    private qcs: QuestionControlService, 
-    private sharedFormData: SharedFormDataService, 
-    private questionService: QuestionService
+    private questionControlService: QuestionControlService,
+    private sharedFormData: SharedFormDataService
   ) {}
 
   ngOnInit() : void {
-    this.getQuestions();
-    this.form = this.qcs.toFormGroup(this.questions as Question<string>[]);
+    this.initFormGroup();
+    this.initAnswers();
   }
 
-  // Méthodes permettant de récupérer les questions chargées dans le fichier de service
-  getQuestions() : void {
-    this.questions = this.questionService.getQuestions();
+  // Méthode permettant d'initialiser le formGroup afin d'y ajouter les différents controle correspondants aux différentes questions
+  private initFormGroup() : void {
+    this.form = this.questionControlService.toFormGroup(this.questions as Question<string>[]);
   }
 
-  // Méthode permettant de faire un passage de données d'un component à un autre
+  // Méthode permettant d'initialiser les réponses du formulaires et les stocker dans l'attribut "answerLoaded" car une fois l'observable answers consommé, on ne pourra pas faire la transmission de données d'un composant à un autre
+  private initAnswers() : void {
+    this.questions.forEach((question) => {
+      question.answers.subscribe((answer) => {
+        question.answersLoaded = answer
+      })
+    })
+  }
+
   onSubmit() : void {
-    this.sharedFormData.setQuestions(this.questions);
+    this.sharedFormData.setQuestions(this.questions)
   }
 
 }

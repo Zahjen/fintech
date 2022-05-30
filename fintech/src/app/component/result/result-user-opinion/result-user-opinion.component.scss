@@ -1,0 +1,73 @@
+@use "../../../../variable/style/mixin";
+@use "../../../../variable/style/color";
+
+
+.subtitle-opinion {
+    margin-bottom: 40px;
+}
+
+.question-agree-container {
+    @include mixin.flex(row, flex-start, center);
+    margin-bottom: 20px;
+
+    .question-description {
+        margin-right: 50px
+    }
+
+    .question-answer-radio-container {
+        @include mixin.flex(row, center, center);
+
+        .question-answer-radio-item {
+            @include mixin.flex(row, center, center);
+
+            margin-left: 30px;
+
+            input[type='radio'] {
+                @include mixin.width-height(20px, 20px);
+
+                margin-right: 20px;
+                filter: grayscale(1);
+            }
+
+            span {
+                margin-right: 30px;
+            }
+        }
+    }
+}
+
+.question-opinion-container {
+    @include mixin.flex(column, center, flex-start);
+    margin-bottom: 50px;
+
+    .question-description {
+        margin: 0 50px 20px 0;
+    }
+
+    .question-answer-radio-container {
+        @include mixin.flex(row, center, center);
+        margin-left: 50px;
+
+        .question-answer-radio-item {
+            @include mixin.flex(row, center, center);
+
+            margin-left: 30px;
+
+            input[type='radio'] {
+                @include mixin.width-height(20px, 20px);
+
+                margin-right: 20px;
+                filter: grayscale(1);
+            }
+
+            span {
+                margin-right: 30px;
+            }
+        }
+    }
+}
+
+.opinion-button-container {
+    @include mixin.flex(row, flex-end, center);
+}
+

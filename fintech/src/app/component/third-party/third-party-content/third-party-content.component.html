@@ -1,0 +1,26 @@
+<form action="" [formGroup]="myForm">
+
+    <app-question-template
+        [form]="myForm"
+        [question]="questionLookForInherentRisk"
+        [placeholder]="placeholder"
+    ></app-question-template>
+
+</form>
+
+<div class="container-third-party-result">
+
+    <h2 class="result-text">
+        Result(s)
+    </h2>
+
+    <div *ngFor="let form of forms | searchFilter: myForm.value.questionThirdParty3" class="third-party-result-item">
+        <div class="result-company-name">
+            {{ form.labelThirdParty }}
+        </div>
+        <div class="result-risk-status">
+            Inherent risk status : <strong>{{ inherentRisk(form.totalPoint) }}</strong>
+        </div>
+    </div>
+
+</div>

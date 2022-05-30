@@ -8,8 +8,8 @@ export const tab = [
         label: 'Form'
     },
     {
-        routeLink: 'entreprise',
-        label: 'Entreprise'
+        routeLink: 'component/third-party/third-party-container',
+        label: 'Third Party'
     }
 ]
 
@@ -19,8 +19,8 @@ export const tabSignIn = [
         label: 'Person of contact'
     },
     {
-        routeLink: 'sign-in-entreprise',
-        label: 'Entreprise'
+        routeLink: 'sign-in-company',
+        label: 'Company'
     },
     {
         routeLink: 'sign-in-password',

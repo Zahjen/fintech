@@ -7,7 +7,7 @@
     <a class="button-fill" [routerLink]="addFormRoute.routeLink">Add New Form</a>
 </div>
 
-<app-form-container-item></app-form-container-item>
+<app-form-container-item *ngIf="forms$ | async as forms" [forms]="forms"></app-form-container-item>
 
 
 

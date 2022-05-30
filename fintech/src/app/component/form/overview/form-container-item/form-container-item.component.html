@@ -1,3 +1,21 @@
-<div class="item-container" *ngFor="let data of finishedFormInfo">
-    <app-form-item [finishedFormInfo]="data"></app-form-item>
+<div class="paginator-control-container">
+
+  <pagination-controls class="pagination-control-form-item"
+    previousLabel="Prev."
+    nextLabel="Next"
+    (pageChange)="handlePageChange($event)"
+  ></pagination-controls>
+
 </div>
+
+<div class="item-container">
+  <div *ngFor="let form of forms | paginate : {
+      itemsPerPage: pageSize,
+      currentPage: page,
+      totalItems: count
+    }; let i = index">
+      <app-form-item [form]="form"></app-form-item>
+  </div>
+</div>
+  
+

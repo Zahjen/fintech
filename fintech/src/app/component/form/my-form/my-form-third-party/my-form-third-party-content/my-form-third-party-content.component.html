@@ -1,0 +1,53 @@
+<div *ngIf="thirdPartyExists">
+    <form action="" [formGroup]="searchForm">
+
+        <app-question-template 
+            [form]="searchForm"
+            [question]="questionSearch"
+            [placeholder]="placeholder"
+        ></app-question-template>
+
+    </form>
+
+    <div class="add-third-party-text" *ngIf="thirdPartyExists">
+        If the company you are looking for has not been registered yet, click on the following button. 
+    </div>
+    
+
+    <div class="add-container">
+        <button class="button-fill" (click)="exists()" *ngIf="thirdPartyExists">
+            Add Company
+        </button>
+    </div> 
+
+    <div class="container-third-party-result">
+        <div *ngFor="let thirdParty of thirdParties | searchFilter: searchForm.value.questionThirdParty1" class="third-party-result-item">
+            <div class="result-company-name">
+                {{ thirdParty.label }}
+            </div>
+            <button class="button-fill" (click)="onSubmitSearch(thirdParty)">Select</button>
+        </div>
+    </div>
+
+</div>
+
+
+<div *ngIf="!thirdPartyExists">
+        
+    <form action="" (ngSubmit)="onSubmitAdd()" [formGroup]="addForm">
+
+            <app-question-template 
+                [form]="addForm" 
+                [question]="questionAdd"
+                [placeholder]="placeholder"
+            ></app-question-template>
+
+        <div class="search-container">
+            <button class="button-fill">
+                Add Company
+            </button>
+        </div> 
+
+    </form>
+
+</div>

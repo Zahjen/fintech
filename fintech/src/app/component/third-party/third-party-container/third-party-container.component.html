@@ -1,0 +1,5 @@
+<h1 class="title-component-container">
+    {{ tab[2].label }}
+</h1>
+
+<app-third-party-content *ngIf="forms$ | async as forms" [forms]="forms"></app-third-party-content>

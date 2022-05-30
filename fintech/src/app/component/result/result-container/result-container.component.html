@@ -1,0 +1,15 @@
+<h1 class="title-component-container">
+    Form Result
+</h1>
+
+<div>
+    The analysis that was performed determined that {{ chosenEntreprise.label }} has an estimated inherent risk of :
+</div>
+
+<div class="inherent-risk-result-container">
+    <div class="inherent-risk-result">
+        {{ inherentRisk(totalPoints()) }}
+    </div>
+</div>
+
+<app-result-user-opinion></app-result-user-opinion>

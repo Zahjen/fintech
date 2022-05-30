@@ -1,0 +1,40 @@
+@use '../../../../../../variable/style/color';
+@use '../../../../../../variable/style/padding';
+@use '../../../../../../variable/style/mixin';
+
+.search-container {
+    @include mixin.flex(row, flex-end, center);
+    margin: 50px 0;
+}
+
+.add-container {
+    @include mixin.flex(row, center, center);
+    margin: 30px 0;
+}
+ 
+.add-third-party-text {
+    margin-top: 50px;
+}
+
+.container-third-party-result {
+    margin-top: 50px;
+
+    .result-text {
+        font-size: 20px;
+        margin-bottom: 30px
+    }
+
+    .third-party-result-item {
+        @include mixin.flex(row, space-between, center);
+        @include mixin.border-radius(15px);
+        margin-bottom: 20px;
+
+        background-color: color.$primary;
+        padding: padding.$TB-item padding.$LR-item;
+
+        .result-company-name, .result-risk-status {
+            @include mixin.width-height(auto, auto);
+        }
+    }
+
+}

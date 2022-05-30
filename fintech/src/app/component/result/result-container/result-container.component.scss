@@ -1,0 +1,13 @@
+@use "../../.././../variable/style/mixin";
+@use "../../.././../variable/style/color";
+
+.inherent-risk-result-container {
+    @include mixin.flex(row, center, center);
+
+    .inherent-risk-result {
+        @include mixin.width-height(auto, auto);
+        margin: 50px auto;
+        border: 1px solid color.$black; 
+        padding: 10px 50px;
+    }
+}
