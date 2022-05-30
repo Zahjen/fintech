@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { FormDetailAdaptedService } from 'src/app/services/adapted-data/form-detail-adapted/form-detail-adapted.service';
+import { SharedFormDataService } from 'src/app/services/shared-form-data/shared-form-data.service';
+import { Form } from 'src/model/form';
+import { FormDetail } from 'src/model/form-detail';
 
 @Component({
   selector: 'app-form-detail-container',
@@ -7,12 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormDetailContainerComponent implements OnInit {
 
-  constructor(
+  formDetails$!: Observable<FormDetail[]>
+  form!: Form;
 
+  constructor(
+    private formDetailAdaptedService: FormDetailAdaptedService,
+    private sharedFormDataService: SharedFormDataService
   ) { }
 
   ngOnInit(): void {
-    
+    this.form = this.sharedFormDataService.getForm();
+    this.formDetails$ = this.formDetailAdaptedService.getFormDetailByIdClient(this.form.id);
   }
 
 }

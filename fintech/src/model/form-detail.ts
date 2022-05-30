@@ -1,0 +1,33 @@
+export class FormDetail {
+    idForm: number;
+    idQuestion: number;
+    labelQuestion: string;
+    type: string;
+    idCategory: number;
+    labelCategory: string;
+    idChosenAnswer: number;
+    labelChosenAnswer: string;
+    obtainedPoint: number;
+  
+    constructor(options: {
+        idForm?: number;
+        idQuestion?: number;
+        labelQuestion?: string;
+        type?: string;
+        idCategory?: number;
+        labelCategory?: string;
+        idChosenAnswer?: number;
+        labelChosenAnswer?: string;
+        obtainedPoint?: number;
+    } = {}) {
+        this.idForm = options.idForm === undefined ? -1 : options.idForm;
+        this.idQuestion = options.idQuestion === undefined ? -1 : options.idQuestion;
+        this.labelQuestion = options.labelQuestion || '';
+        this.type = options.type || '';
+        this.idCategory = options.idCategory === undefined ? -1 : options.idCategory;
+        this.labelCategory = options.labelCategory || '';
+        this.idChosenAnswer = options.idChosenAnswer === undefined ? -1 : options.idChosenAnswer;
+        this.labelChosenAnswer = options.labelChosenAnswer || '';
+        this.obtainedPoint = options.obtainedPoint === undefined ? -1 : options.obtainedPoint;
+    }
+}
