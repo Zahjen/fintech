@@ -1,6 +1,6 @@
 <?php
 
-class ObtainedPointController {
+class buisness_lineController {
 
     // --------------------
     // Déclaration des attributs
@@ -8,20 +8,18 @@ class ObtainedPointController {
 
     private $db;
     private $request_method;
-    private $id_question;
-    private $id_answer;
-    private $obtained_point_manager;
+    private $id_buisness_line;
+    private $buisness_line_manager;
 
     // --------------------
     // Constructeur
     // --------------------
 
-    public function __construct($db, $request_method, $id_question, $id_answer) {
+    public function __construct($db, $request_method, $id_buisness_line) {
         $this->db = $db;
         $this->request_method = $request_method;
-        $this->id_question = $id_question;
-        $this->id_answer = $id_answer;
-        $this->obtained_point_manager = new PointObtenuManager($db);
+        $this->id_buisness_line = $id_buisness_line;
+        $this->buisness_line_manager = new SecteurActiviteManager($db);
     }
 
     // --------------------
@@ -33,14 +31,8 @@ class ObtainedPointController {
 
         switch ($this->request_method) {
             case 'GET':
-                if ($this->id_question) {
-
-                    if ($this->id_answer) {
-                        $response = $this->get_by_id_question_answer($this->id_question, $this->id_answer);
-                    } else {
-                        $response = $this->get_by_id($this->id_question);
-                    }
-                    
+                if ($this->id_buisness_line) {
+                    $response = $this->get_by_id($this->id_buisness_line);
                 } else {
                     $response = $this->get_all();
                 };
@@ -51,11 +43,11 @@ class ObtainedPointController {
                 break;
 
             case 'PUT':
-                $response = $this->update($this->id_question);
+                $response = $this->update($this->id_buisness_line);
                 break;
 
             case 'DELETE':
-                $response = $this->delete($this->id_question);
+                $response = $this->delete($this->id_buisness_line);
                 break;
 
             default:
@@ -71,64 +63,46 @@ class ObtainedPointController {
 
     }
 
-    // Méthode permettant de récupérer tous les points obtenus 
+    // Méthode permettant de récupérer tous les secteurs 
     private function get_all() {
 
-        $obtained_points = $this->obtained_point_manager->getAll();
+        $buisness_lines = $this->buisness_line_manager->getAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
 
         header('Content-type: application/json');
 
-        $response['body'] = json_encode($obtained_points);
+        $response['body'] = json_encode($buisness_lines);
 
         return $response;
 
     }
 
-    // Méthode permettant de récupérer les points obtenus selon l'id de la question
+    // Méthode permettant de récupérer un secteur selon son id
     private function get_by_id($id) {
 
-        $obtained_point = $this->obtained_point_manager->getById($id);
+        $buisness_line = $this->buisness_line_manager->getById($id);
 
-        
-
-        if (!$obtained_point) {
+        if (!$buisness_line) {
             return $this->not_found_query();
         }
 
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($obtained_point);
+        $response['body'] = json_encode($buisness_line);
 
         return $response;
 
     }
 
-    // Méthode permettant de récupérer les points obtenu a une reponse associée à une certaine question
-    private function get_by_id_question_answer($id_question, $id_answer) {
-
-        $obtained_point = $this->obtained_point_manager->getByIdQuestionIdReponse($id_question, $id_answer);
-
-        if (!$obtained_point) {
-            return $this->not_found_query();
-        }
-
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($obtained_point);
-
-        return $response;
-
-    }
-
-    // Méthode permettant d'insérer un point obtenu dans la base de données
+    // Méthode permettant d'insérer un secteur dans la base de données
     private function insert() {
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_obtained_point_valid($input)) {
+        if (!$this->is_buisness_line_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->obtained_point_manager->insert($input);
+        $this->buisness_line_manager->insert($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
@@ -136,23 +110,22 @@ class ObtainedPointController {
 
     }
 
-    // Méthode permettant de mettre à jour un point obtenu l'id d'une question
-    // A voir pour ajouter égalment l'id de réponse pour update le point complet 
+    // Méthode permettant de mettre à jour un secteur selon son id
     private function update($id) {
 
-        $obtained_point = $this->obtained_point_manager->getById($id);
+        $buisness_line = $this->buisness_line_manager->getById($id);
 
-        if (!$obtained_point) {
+        if (! $buisness_line) {
             return $this->not_found_query();
         }
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_obtained_point_valid($input)) {
+        if (!$this->is_buisness_line_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->obtained_point_manager->update($input);
+        $this->buisness_line_manager->update($input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -160,16 +133,16 @@ class ObtainedPointController {
 
     }
 
-    // Méthode permettant de supprimer une point obtenu selon son id
+    // Méthode permettant de supprimer un secteur selon son id
     private function delete($id) {
 
-        $obtained_point = $this->obtained_point_manager->getById($id);
+        $buisness_line = $this->buisness_line_manager->getById($id);
 
-        if (!$obtained_point) {
+        if (!$buisness_line) {
             return $this->not_found_query();
         }
 
-        $this->obtained_point_manager->delete($obtained_point);
+        $this->buisness_line_manager->delete($buisness_line);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -177,10 +150,10 @@ class ObtainedPointController {
 
     }
 
-    // Méthode permettant de vérifier qu'une point obtenu est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
-    private function is_obtained_point_valid($input) {
+    // Méthode permettant de vérifier qu'un secteur est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
+    private function is_buisness_line_valid($input) {
 
-        return isset($input['idQuestion']) && isset($input['idReponse']) && isset($input['pointQuestion']);
+        return isset($input['labelSecteur']);
 
     }
 
