@@ -18,7 +18,7 @@
         public function getById(int $id) {
             $monFormulaire = null;
             try {
-                $req = $this->bdd->prepare('SELECT idFormulaire,idClient,idPrestataire,idSecteur FROM formulaire WHERE idFormulaire = ?');
+                $req = $this->bdd->prepare('SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire WHERE idFormulaire = ?');
                 $req->execute(array($id));
                 $donnees = $req->fetch(PDO::FETCH_ASSOC);
                 $monFormulaire = new Formulaire();
@@ -29,10 +29,27 @@
             return $monFormulaire;
         }
 
+        public function getByIdClient(int $id) {
+            $monFormulaire = null;
+            try {
+                $req = $this->bdd->prepare( 'SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire WHERE idClient = :idClient');
+                $req->bindValue(':idClient', $id, PDO::PARAM_INT);
+                $req->execute();
+                while ($donnees = $req->fetch(PDO::FETCH_ASSOC)) {
+                    $form = new Formulaire();
+                    $form->hydrate($donnees);
+                    $monFormulaire[] = $form;
+                }
+            } catch (Exception $erreur) {
+                die('Erreur : '.$erreur->getMessage());
+            }
+            return $monFormulaire;
+        }
+
         public function getAll() {
             $listeFormulaires = [];
             try {
-                $req = $this->bdd->prepare( 'SELECT idFormulaire,idClient,idPrestataire,idSecteur FROM formulaire');
+                $req = $this->bdd->prepare( 'SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire');
                 $req->execute();
                 while ($donnees = $req->fetch(PDO::FETCH_ASSOC)) {
                     $form = new Formulaire();
@@ -47,10 +64,12 @@
 
         public function add(Formulaire $formulaire){
             try {
-                $req = $this->bdd->prepare(' INSERT INTO formulaire(idClient, idPrestataire, idSecteur) VALUES(:idClient, :idPrestataire, :idSecteur) ');
+                $req = $this->bdd->prepare(' INSERT INTO formulaire(idClient, idPrestataire, idSecteur, idPays, totalPoints) VALUES(:idClient, :idPrestataire, :idSecteur, :totalPoints) ');
                 $req->bindValue(':idClient', $formulaire->getIdClient(), PDO::PARAM_INT);
                 $req->bindValue(':idPrestataire', $formulaire->getIdPrestataire(), PDO::PARAM_INT);
                 $req->bindValue(':idSecteur', $formulaire->getIdSecteur(), PDO::PARAM_INT);
+                $req->bindValue(':idPays', $formulaire->getIdPays(), PDO::PARAM_INT);
+                $req->bindValue(':totalPoints', $formulaire->getTotalPoints(), PDO::PARAM_INT);
                 $req->execute();
             } catch (Exception $erreur) {
                 die('Erreur : '.$erreur->getMessage());
@@ -60,11 +79,13 @@
         // Quand on ajoute une form à la BDD, normalement, on est plus censé la modifier
         public function update(Formulaire $formulaire){
             try{
-                $req = $this->bdd->prepare('UPDATE formulaire SET idClient = :idClient, idPrestataire = :idPrestataire, statut = :statut, listeQuestions = :listeQuestions  WHERE idFormulaire = :id');
+                $req = $this->bdd->prepare('UPDATE formulaire SET idClient = :idClient, idPrestataire = :idPrestataire, idSecteur = :idSecteur, idPays = :idPays, totalPoints = :totalPoints  WHERE idFormulaire = :id');
                 $req->bindValue(':id', $formulaire->getIdFormulaire(), PDO::PARAM_INT);
                 $req->bindValue(':idClient', $formulaire->getIdClient(), PDO::PARAM_INT);
                 $req->bindValue(':idPrestataire', $formulaire->getIdPrestataire(), PDO::PARAM_INT);
                 $req->bindValue(':idSecteur', $formulaire->getIdSecteur(), PDO::PARAM_INT);
+                $req->bindValue(':idPays', $formulaire->getIdPays(), PDO::PARAM_INT);
+                $req->bindValue(':totalPoints', $formulaire->getTotalPoints(), PDO::PARAM_INT);
                 $req->execute();
             }
             catch(Exception $e){

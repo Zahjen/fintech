@@ -9,17 +9,23 @@ class FormController {
     private $db;
     private $request_method;
     private $id_form;
+    private $form;
+    private $id_client;
     private $form_manager;
+    private $form_adapter;
 
     // --------------------
     // Constructeur
     // --------------------
 
-    public function __construct($db, $request_method, $id_form) {
+    public function __construct($db, $request_method, $id_form, $form, $id_client) {
         $this->db = $db;
         $this->request_method = $request_method;
         $this->id_form = $id_form;
+        $this->form = $form;
+        $this->id_client = $id_client;
         $this->form_manager = new FormulaireManager($db);
+        $this->form_adapter = new FormAdapter($db);
     }
 
     // --------------------
@@ -33,9 +39,11 @@ class FormController {
             case 'GET':
                 if ($this->id_form) {
                     $response = $this->get_by_id($this->id_form);
+                } else if ($this->form && $this->id_client) {
+                    $response = $this->get_by_id_client($this->id_client);
                 } else {
                     $response = $this->get_all();
-                };
+                }
                 break;
 
             case 'POST':
@@ -43,11 +51,11 @@ class FormController {
                 break;
 
             case 'PUT':
-                $response = $this->update($this->id_form);
+                $response = $this->update($this->form);
                 break;
 
             case 'DELETE':
-                $response = $this->delete($this->id_form);
+                $response = $this->delete($this->form);
                 break;
 
             default:
@@ -88,6 +96,22 @@ class FormController {
 
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($form);
+
+        return $response;
+
+    }
+
+    // Méthode permettant de récupérer les formulaires d'un clients
+    private function get_by_id_client($id) {
+
+        $forms = $this->form_adapter->adapt_by_id($id);
+
+        if (!$forms) {
+            return $this->not_found_query();
+        }
+
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($forms);
 
         return $response;
 

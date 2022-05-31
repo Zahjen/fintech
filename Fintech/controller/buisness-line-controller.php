@@ -1,6 +1,6 @@
 <?php
 
-class SectorController {
+class buisness_lineController {
 
     // --------------------
     // Déclaration des attributs
@@ -8,18 +8,18 @@ class SectorController {
 
     private $db;
     private $request_method;
-    private $id_sector;
-    private $sector_manager;
+    private $id_buisness_line;
+    private $buisness_line_manager;
 
     // --------------------
     // Constructeur
     // --------------------
 
-    public function __construct($db, $request_method, $id_sector) {
+    public function __construct($db, $request_method, $id_buisness_line) {
         $this->db = $db;
         $this->request_method = $request_method;
-        $this->id_sector = $id_sector;
-        $this->sector_manager = new SecteurActiviteManager($db);
+        $this->id_buisness_line = $id_buisness_line;
+        $this->buisness_line_manager = new SecteurActiviteManager($db);
     }
 
     // --------------------
@@ -31,8 +31,8 @@ class SectorController {
 
         switch ($this->request_method) {
             case 'GET':
-                if ($this->id_sector) {
-                    $response = $this->get_by_id($this->id_sector);
+                if ($this->id_buisness_line) {
+                    $response = $this->get_by_id($this->id_buisness_line);
                 } else {
                     $response = $this->get_all();
                 };
@@ -43,11 +43,11 @@ class SectorController {
                 break;
 
             case 'PUT':
-                $response = $this->update($this->id_sector);
+                $response = $this->update($this->id_buisness_line);
                 break;
 
             case 'DELETE':
-                $response = $this->delete($this->id_sector);
+                $response = $this->delete($this->id_buisness_line);
                 break;
 
             default:
@@ -66,12 +66,12 @@ class SectorController {
     // Méthode permettant de récupérer tous les secteurs 
     private function get_all() {
 
-        $sectors = $this->sector_manager->getAll();
+        $buisness_lines = $this->buisness_line_manager->getAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
 
         header('Content-type: application/json');
 
-        $response['body'] = json_encode($sectors);
+        $response['body'] = json_encode($buisness_lines);
 
         return $response;
 
@@ -80,14 +80,14 @@ class SectorController {
     // Méthode permettant de récupérer un secteur selon son id
     private function get_by_id($id) {
 
-        $sector = $this->sector_manager->getById($id);
+        $buisness_line = $this->buisness_line_manager->getById($id);
 
-        if (!$sector) {
+        if (!$buisness_line) {
             return $this->not_found_query();
         }
 
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($sector);
+        $response['body'] = json_encode($buisness_line);
 
         return $response;
 
@@ -98,11 +98,11 @@ class SectorController {
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_sector_valid($input)) {
+        if (!$this->is_buisness_line_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->sector_manager->insert($input);
+        $this->buisness_line_manager->insert($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
@@ -113,19 +113,19 @@ class SectorController {
     // Méthode permettant de mettre à jour un secteur selon son id
     private function update($id) {
 
-        $sector = $this->sector_manager->getById($id);
+        $buisness_line = $this->buisness_line_manager->getById($id);
 
-        if (! $sector) {
+        if (! $buisness_line) {
             return $this->not_found_query();
         }
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_sector_valid($input)) {
+        if (!$this->is_buisness_line_valid($input)) {
             return $this->not_executable_query();
         }
 
-        $this->sector_manager->update($input);
+        $this->buisness_line_manager->update($input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -136,13 +136,13 @@ class SectorController {
     // Méthode permettant de supprimer un secteur selon son id
     private function delete($id) {
 
-        $sector = $this->sector_manager->getById($id);
+        $buisness_line = $this->buisness_line_manager->getById($id);
 
-        if (!$sector) {
+        if (!$buisness_line) {
             return $this->not_found_query();
         }
 
-        $this->sector_manager->delete($sector);
+        $this->buisness_line_manager->delete($buisness_line);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
 
@@ -151,7 +151,7 @@ class SectorController {
     }
 
     // Méthode permettant de vérifier qu'un secteur est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
-    private function is_sector_valid($input) {
+    private function is_buisness_line_valid($input) {
 
         return isset($input['labelSecteur']);
 

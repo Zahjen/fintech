@@ -8,6 +8,8 @@
         private $idClient; // clef étrangère
         private $idPrestataire; // clef étrangère
         private $idSecteur; // clef étrangère
+        private $idPays;
+        private $totalPoints;
 
         // -------------------------------------------------
         //getters
@@ -23,6 +25,12 @@
         public function getIdSecteur() {
             return $this->idSecteur;
         }
+        public function getIdPays() {
+            return $this->idPays;
+        }
+        public function getTotalPoints() {
+            return $this->totalPoints;
+        }
 
         // -------------------------------------------------
         //setters
@@ -37,6 +45,12 @@
         }
         public function setIdSecteur($idSecteur) {
             $this->idSecteur = (int)$idSecteur;
+        }
+        public function setIdPays($idPays) {
+            $this->idPays = (int)$idPays;
+        }
+        public function setTotalPoints($totalPoints) {
+            $this->totalPoints = (int)$totalPoints;
         }
 
         // -------------------------------------------------
@@ -57,7 +71,9 @@
                 'idFormulaire' => $this->getIdFormulaire(),
                 'idClient' => $this->getIdClient(),
                 'idPrestataire' => $this->getIdPrestataire(),
-                'idSecteur' => $this->getIdSecteur()
+                'idSecteur' => $this->getIdSecteur(),
+                'idPays' => $this->getIdPays(),
+                'totalPoints' => $this->getTotalPoints()
             ];
             return $json;
         }

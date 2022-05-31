@@ -32,17 +32,15 @@
         }
         
         public function getByIdQuestionIdReponse($idQuestion, $idReponse) {
-            $monPointObtenu = [];
-            try {
+            $monPointObtenu = null;
+            try{
                 $req = $this->bdd->prepare('SELECT idQuestion, idReponse, pointQuestion FROM pointobtenu WHERE idQuestion = :idQuestion AND idReponse = :idReponse');
                 $req->bindValue(':idQuestion', $idQuestion, PDO::PARAM_INT);
                 $req->bindValue(':idReponse', $idReponse, PDO::PARAM_INT);
                 $req->execute();
-                while ($donnees = $req->fetch(PDO::FETCH_ASSOC)) {
-                    $pointObt = new PointObtenu();
-                    $pointObt->hydrate($donnees);
-                    $monPointObtenu[] = $pointObt;
-                }
+                $donnees = $req->fetch(PDO::FETCH_ASSOC);
+                $monPointObtenu = new PointObtenu();
+                $monPointObtenu->hydrate($donnees);
             } catch (Exception $erreur) {
                 die('Erreur : '.$erreur->getMessage());
             }

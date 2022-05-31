@@ -9,17 +9,21 @@ class AnswerController {
     private $db;
     private $request_method;
     private $id_answer;
+    private $answer;
     private $answer_manager;
+    private $answer_adapter;
 
     // --------------------
     // Constructeur
     // --------------------
 
-    public function __construct($db, $request_method, $id_answer) {
+    public function __construct($db, $request_method, $id_answer, $answer) {
         $this->db = $db;
         $this->request_method = $request_method;
         $this->id_answer = $id_answer;
+        $this->answer = $answer;
         $this->answer_manager = new ReponseManager($db);
+        $this->answer_adapter = new AnswerAdapter($db);
     }
 
     // --------------------
@@ -33,6 +37,8 @@ class AnswerController {
             case 'GET':
                 if ($this->id_answer) {
                     $response = $this->get_by_id($this->id_answer);
+                } else if ($this->answer) {
+                    $response = $this->get_adapted_answers();
                 } else {
                     $response = $this->get_all();
                 };
@@ -67,6 +73,22 @@ class AnswerController {
     private function get_all() {
 
         $answers = $this->answer_manager->getAll();
+
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+
+        header('Content-type: application/json');
+
+        $response['body'] = json_encode($answers);
+
+        return $response;
+
+    }
+
+    // Méthode permettant de récupérer toutes les réponses adaptées, i.e. avec les points obtenues et les différents label pour les dropdowns
+    private function get_adapted_answers() {
+
+        $answers = $this->answer_adapter->adapt();
+
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
 
         header('Content-type: application/json');

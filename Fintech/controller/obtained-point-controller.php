@@ -90,6 +90,8 @@ class ObtainedPointController {
 
         $obtained_point = $this->obtained_point_manager->getById($id);
 
+        
+
         if (!$obtained_point) {
             return $this->not_found_query();
         }

@@ -3,6 +3,18 @@
     require '../modele/bdd/Connexion.php';
 
     require '../controller/form-controller.php';
+
+    require '../adapter/form-adapter.php';
+
+    require '../modele/managers/PaysManager.php';
+    require '../modele/objets/Pays.php';
+
+    require '../modele/managers/PrestataireManager.php';
+    require '../modele/objets/Prestataire.php';
+
+    require '../modele/managers/SecteurActiviteManager.php';
+    require '../modele/objets/SecteurActivite.php';
+
     require '../modele/managers/FormulaireManager.php';
     require '../modele/objets/Formulaire.php';
 
@@ -21,16 +33,29 @@
 
     // Si on suit le raisonnement nous permettant de récupérer les élèments de l'url, si on a un nombre pour $uri[5], on le stock dans une variable
     $id_form = null;
+    $form = null;
+    $id_client = null;
+
 
     if (isset($uri[5])) {
-        $id_form = (int) $uri[5];
+
+        if ($uri[5] === "adapt") {
+            $form = (string) $uri[5];
+
+            if (isset($uri[6])) {
+                $id_client = (int) $uri[6];
+            }
+
+        } else {
+            $id_form = (int) $uri[5];
+        }
     }
 
     // On récupère le type de requête envoyée, i.e. GET, POST, PUT, DELETE
     $request_method = $_SERVER["REQUEST_METHOD"];
 
     // En instanciant la classe FormController, et selon la requête, on executera la requête demandée
-    $form_controller = new FormController($bdd, $request_method, $id_form);
+    $form_controller = new FormController($bdd, $request_method, $id_form, $form, $id_client);
     $form_controller->execute_query();
 
 ?>
