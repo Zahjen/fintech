@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Dao } from 'src/app/interfaces/dao';
 import { IAdaptedFormDetail } from 'src/app/interfaces/object-adapted/form-detail-adapted';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FormDetailService {
+export class FormDetailService implements Dao<IAdaptedFormDetail> {
 
   private urlBase: string = "http://127.0.0.1/dashboard/Fintech/api/form-detail.php/";
 

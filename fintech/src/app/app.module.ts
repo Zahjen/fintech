@@ -20,12 +20,13 @@ import { SearchFilterPipe } from './pipe/search-filter/search-filter.pipe';
 import { MyFormQuestionnaireContainerComponent } from './component/form/my-form/my-form-questionnaire-container/my-form-questionnaire-container/my-form-questionnaire-container.component';
 import { ResultContainerComponent } from './component/result/result-container/result-container.component';
 import { ResultUserOpinionComponent } from './component/result/result-user-opinion/result-user-opinion.component';
-import { ResultAnalysisComponent } from './component/result/result-analysis/result-analysis.component';
 import { FormDetailContainerComponent } from './component/form/detail/form-detail-container/form-detail-container.component';
 import { MyFormThirdPartyContainerComponent } from './component/form/my-form/my-form-third-party/my-form-third-party-container/my-form-third-party-container.component';
 import { MyFormThirdPartyContentComponent } from './component/form/my-form/my-form-third-party/my-form-third-party-content/my-form-third-party-content.component';
 import { ThirdPartyContainerComponent } from './component/third-party/third-party-container/third-party-container.component';
 import { ThirdPartyContentComponent } from './component/third-party/third-party-content/third-party-content.component';
+import { ResultAnalysisContainerComponent } from './component/result/result-analysis/result-analysis-container/result-analysis-container.component';
+import { ResultAnalysisContentComponent } from './component/result/result-analysis/result-analysis-content/result-analysis-content.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +45,13 @@ import { ThirdPartyContentComponent } from './component/third-party/third-party-
     MyFormSumUpComponent,
     ResultContainerComponent,
     ResultUserOpinionComponent,
-    ResultAnalysisComponent,
     FormDetailContainerComponent,
     MyFormThirdPartyContainerComponent,
     MyFormThirdPartyContentComponent,
     ThirdPartyContainerComponent,
-    ThirdPartyContentComponent
+    ThirdPartyContentComponent,
+    ResultAnalysisContainerComponent,
+    ResultAnalysisContentComponent
   ],
   imports: [
     BrowserModule,

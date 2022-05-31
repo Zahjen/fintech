@@ -1,0 +1,9 @@
+<h1>
+    Analysis Detail for {{ chosenThirdParty.label }}
+</h1>
+
+<app-result-analysis-content *ngIf="categories$ | async as categories" [categories]="categories"></app-result-analysis-content>
+
+<div class="button-back-to-form-container">
+    <a [routerLink]="formOverview.routeLink" class="button-fill">Back To Form</a>
+</div>

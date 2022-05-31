@@ -11,27 +11,21 @@ import { Question } from 'src/model/question';
 })
 export class ResultUserOpinionComponent implements OnInit {
 
-  agree = false;
   form!: FormGroup;
   questions = [];
 
   constructor(private qcs: QuestionControlService, private router: Router) { }
 
-  // Faire le controle sur les deux question
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() : void {
     this.form = this.qcs.toFormGroup(this.questions as Question<string>[]);
   }
 
-  agreeOpinion() {
-    this.agree = false
-  }
-
-  notAgreeOpinion() {
-    this.agree = true
-  }
-
   onSubmit() : void {
-    this.router.navigate(['component/form/result/result-analysis']);
+    this.router.navigate(['component/form/result/result-analysis/result-analysis-container']);
   }
 
 }

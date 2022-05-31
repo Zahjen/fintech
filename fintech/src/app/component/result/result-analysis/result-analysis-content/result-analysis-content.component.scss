@@ -1,4 +1,4 @@
-@use '../../../../variable/style/mixin';
+@use '../../../../../variable/style/mixin';
 
 .spider-chart-constainer {
     @include mixin.width-height(700px, 700px);
@@ -8,8 +8,4 @@
         width: 700px;
         height: 700px;
     }
-}
-
-.button-back-to-form-container {
-    @include mixin.flex(row, flex-end, center);
 }

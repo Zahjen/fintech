@@ -38,12 +38,12 @@ export class Question<T> {
         this.label = options.label || '';
         this.required = options.required === undefined ? true : options.required;
         this.isHidden = options.isHidden === undefined ? true : options.isHidden;
-        this.id = options.id === undefined ? 1 : options.id;
+        this.id = options.id === undefined ? -1 : options.id;
         this.controlType = options.controlType || '';
         this.type = options.type || '';
         this.answers = options.answers || new Observable<Answer[]>();
         this.answersLoaded = options.answersLoaded || [];
         this.obtainedPoints = options.obtainedPoints === undefined ? 0 : options.obtainedPoints;
-        this.idCategory = options.idCategory === undefined ? 0 : options.idCategory;
+        this.idCategory = options.idCategory === undefined ? -1 : options.idCategory;
     }
 }

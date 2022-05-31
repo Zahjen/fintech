@@ -1,0 +1,5 @@
+@use '../../../../../variable/style/mixin';
+
+.button-back-to-form-container {
+    @include mixin.flex(row, flex-end, center);
+}

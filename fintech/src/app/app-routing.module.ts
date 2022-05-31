@@ -6,7 +6,7 @@ import { MyFormQuestionnaireContainerComponent } from './component/form/my-form/
 import { MyFormSumUpComponent } from './component/form/my-form/my-form-sum-up/my-form-sum-up.component';
 import { MyFormThirdPartyContainerComponent } from './component/form/my-form/my-form-third-party/my-form-third-party-container/my-form-third-party-container.component';
 import { FormContainerComponent } from './component/form/overview/form-container/form-container.component';
-import { ResultAnalysisComponent } from './component/result/result-analysis/result-analysis.component';
+import { ResultAnalysisContainerComponent } from './component/result/result-analysis/result-analysis-container/result-analysis-container.component';
 import { ResultContainerComponent } from './component/result/result-container/result-container.component';
 import { ThirdPartyContainerComponent } from './component/third-party/third-party-container/third-party-container.component';
 
@@ -45,8 +45,8 @@ const routes: Routes = [
     component: ResultContainerComponent
   },
   {
-    path: "component/form/result/result-analysis",
-    component: ResultAnalysisComponent
+    path: "component/form/result/result-analysis/result-analysis-container",
+    component: ResultAnalysisContainerComponent
   },
   {
     path: "component/form/detail/form-detail-container",

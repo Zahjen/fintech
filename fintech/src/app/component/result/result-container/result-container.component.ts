@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedFormDataService } from 'src/app/services/shared-form-data/shared-form-data.service';
 import { Question } from 'src/model/question';
 import { ThirdParty } from 'src/model/third-party';
+import { Utils } from 'src/tools/utils';
 
 @Component({
   selector: 'app-result-container',
@@ -10,70 +11,36 @@ import { ThirdParty } from 'src/model/third-party';
 })
 export class ResultContainerComponent implements OnInit {
 
+  utils = Utils.getInstance();
+
   questions!: Question<any>[];
-  chosenEntreprise!: ThirdParty;
+  chosenThirdParty!: ThirdParty; 
+  inherentRisk!: string;
+  totalPoint!: number;
 
   constructor(private sharedFormData: SharedFormDataService) { }
 
   ngOnInit() : void {
+    this.initQuestions();
+    this.initChosenThirdParty();
+    this.initTotalPoint();
+    this.initInehrentRisk();
+  }  
+
+  private initQuestions() : void {
     this.questions = this.sharedFormData.getQuestions();
-    this.sharedFormData.setPointsByQuestionCategorie(
-      this.sortQuestionPointByCategory(this.questions)
-    )
-    this.chosenEntreprise = this.sharedFormData.getThirdPaty();
   }
 
-  // Méthode permettant de calculer le nombre total de points obtenus via les questions du formulaire 
-  totalPoints() : number {
-    let points: number = 0;
-
-    for (let i = 0 ; i < this.questions.length ; i++) {
-      points += this.questions[i].obtainedPoints;
-    }
-
-    return points;
+  private initChosenThirdParty() : void {
+    this.chosenThirdParty = this.sharedFormData.getThirdPaty();
   }
 
-  inherentRisk(point: number) : string {
-    let risk: string = "";
-
-    if (0 <= point && point <= 10) {
-      risk = "low";
-    } else if (11 <= point && point <= 18) {
-      risk = "Medium";
-    } else if (19 <= point && point <= 24) {
-      risk = "High";
-    } else if (point > 24) {
-      risk = "Critical";
-    } else {
-      risk = "error"
-    }
-
-    return risk;
+  private initTotalPoint() : void {
+    this.totalPoint = this.utils.totalPoints(this.questions);
   }
 
-  sortQuestionPointByCategory(questions: Question<any>[]) : number[] {
-    let points: number[] = [0, 0, 0, 0, 0];
-
-    questions.forEach((question) => {
-
-      if (question.idCategory === 1) {
-        points[0] += question.obtainedPoints
-      } else if (question.idCategory === 2) {
-        points[1] += question.obtainedPoints
-      } else if (question.idCategory === 3) {
-        points[2] += question.obtainedPoints
-      } else if (question.idCategory === 4) {
-        points[3] += question.obtainedPoints
-      } else if (question.idCategory === 5) {
-        points[4] += question.obtainedPoints
-      }
-
-    })
-
-    return points;
+  private initInehrentRisk() : void {
+    this.inherentRisk = this.utils.inherentRisk(this.totalPoint);
   }
-
-
 
 }
