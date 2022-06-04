@@ -28,6 +28,7 @@ import { ThirdPartyContentComponent } from './component/third-party/third-party-
 import { ResultAnalysisContainerComponent } from './component/result/result-analysis/result-analysis-container/result-analysis-container.component';
 import { ResultAnalysisContentComponent } from './component/result/result-analysis/result-analysis-content/result-analysis-content.component';
 import { FormDetailChartComponent } from './component/form/detail/form-detail-chart/form-detail-chart.component';
+import { FormDetailAnswerComponent } from './component/form/detail/form-detail-answer/form-detail-answer.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FormDetailChartComponent } from './component/form/detail/form-detail-ch
     ThirdPartyContentComponent,
     ResultAnalysisContainerComponent,
     ResultAnalysisContentComponent,
-    FormDetailChartComponent
+    FormDetailChartComponent,
+    FormDetailAnswerComponent
   ],
   imports: [
     BrowserModule,

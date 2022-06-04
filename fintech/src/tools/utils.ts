@@ -1,3 +1,4 @@
+import { IObtainedPoint } from "src/app/interfaces/object-from-api/obtained-point";
 import { Answer } from "src/model/answer";
 import { Category } from "src/model/category";
 import { Question } from "src/model/question";
@@ -181,4 +182,13 @@ export class Utils {
         return res;
     }
 
+    public contains(object: any, array: any[]) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].id === object.id) {
+                return true;
+            }
+        }
+    
+        return false;
+    }
 }

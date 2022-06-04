@@ -2,4 +2,6 @@
 	Form Detail
 </h1>
 
-<app-form-detail-chart *ngIf="formDetails$ | async as formDetails" [formDetails]="formDetails" [form]="form" [categories]="(categories$ | async)!"></app-form-detail-chart>
+<app-form-detail-chart *ngIf="formDetails$ | async as formDetails" [formDetails]="formDetails" [form]="form"></app-form-detail-chart>
+
+<app-form-detail-answer *ngIf="formDetails$ | async as formDetails" [formDetails]="formDetails" [form]="form"></app-form-detail-answer>

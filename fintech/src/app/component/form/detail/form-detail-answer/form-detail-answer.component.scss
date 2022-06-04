@@ -1,0 +1,16 @@
+@use '../../../../../variable/style/mixin';
+
+.sub-title {
+    margin: 50px 0;
+}
+
+.question-container {
+
+    .question-item {
+        margin-bottom: 20px;
+    }
+
+    .bold{
+        font-weight: bold;
+    }
+}

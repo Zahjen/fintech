@@ -9,6 +9,7 @@ export interface IAdaptedFormDetail {
     question: IQuestion,
     chosenAnswer: IAnswer,
     category: ICategory,
-    obtainedPoint: IObtainedPoint
+    obtainedPoint: IObtainedPoint,
+    pointMax: IObtainedPoint[]
 
 }

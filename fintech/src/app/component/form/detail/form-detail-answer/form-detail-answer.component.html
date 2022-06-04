@@ -1,0 +1,16 @@
+<h2 class="sub-title">Answer from the form</h2>
+
+<div class="question-container">
+    
+    <div *ngFor="let formDetail of formDetails" class="question-item">
+        <div *ngIf="formDetail.type === 'radio'" class="radio-question">
+            <div class="question">
+                {{ formDetail.labelQuestion }}
+            </div>
+            <div class="answer">
+                <span class="bold">Answer: &nbsp;</span> {{ formDetail.labelChosenAnswer }}
+            </div>
+        </div>
+    </div>
+
+</div>

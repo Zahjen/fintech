@@ -17,3 +17,8 @@ export const formDetailItem = {
     routeLink: '/component/form/detail/form-detail-container',
     label: 'Form Detail'
 }
+
+export const formDetailAnswer = {
+    routeLink: '/component/form/detail/form-detail-answer',
+    label: 'Answers Form Detail'
+}

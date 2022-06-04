@@ -1,16 +1,18 @@
-<div>
-	{{ form | json }}
+<h2 class="sub-title">Analysis carried out for {{ form.labelThirdParty }}</h2>
+
+<div class="dropdown-answer-container">
+    <div class="company-name item">
+        <span class="bold">Company name: &nbsp;</span> {{ form.labelThirdParty }}
+    </div>
+    <div class="country item">
+        <span class="bold">Country: &nbsp;</span> {{ form.labelCountry }}
+    </div>
+    <div class="buisness-line item">
+        <span class="bold">buisness-line: &nbsp;</span> {{ form.labelBuisnessLine }}
+    </div>
 </div>
 
-<br><br>
-
-<div>
-	{{ categories | json }}
+<div class="spider-chart-container">
+    <canvas id="chart"></canvas>
 </div>
 
-<br><br>
-
-<div *ngFor="let formDetail of formDetails">
-	{{ formDetail | json }}
-	<br><br>
-</div>

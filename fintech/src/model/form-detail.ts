@@ -1,3 +1,5 @@
+import { IObtainedPoint } from "src/app/interfaces/object-from-api/obtained-point";
+
 export class FormDetail {
     idForm: number;
     idQuestion: number;
@@ -8,6 +10,7 @@ export class FormDetail {
     idChosenAnswer: number;
     labelChosenAnswer: string;
     obtainedPoint: number;
+    pointMax: IObtainedPoint[];
   
     constructor(options: {
         idForm?: number;
@@ -19,6 +22,7 @@ export class FormDetail {
         idChosenAnswer?: number;
         labelChosenAnswer?: string;
         obtainedPoint?: number;
+        pointMax?: IObtainedPoint[];
     } = {}) {
         this.idForm = options.idForm === undefined ? -1 : options.idForm;
         this.idQuestion = options.idQuestion === undefined ? -1 : options.idQuestion;
@@ -29,5 +33,6 @@ export class FormDetail {
         this.idChosenAnswer = options.idChosenAnswer === undefined ? -1 : options.idChosenAnswer;
         this.labelChosenAnswer = options.labelChosenAnswer || '';
         this.obtainedPoint = options.obtainedPoint === undefined ? -1 : options.obtainedPoint;
+        this.pointMax = options.pointMax || [];
     }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CategoryAdaptedService } from 'src/app/services/adapted-data/category-adapted/category-adapted.service';
 import { FormDetailAdaptedService } from 'src/app/services/adapted-data/form-detail-adapted/form-detail-adapted.service';
 import { SharedFormDataService } from 'src/app/services/shared-form-data/shared-form-data.service';
 import { Category } from 'src/model/category';
@@ -20,14 +19,12 @@ export class FormDetailContainerComponent implements OnInit {
 
   constructor(
     private formDetailAdaptedService: FormDetailAdaptedService,
-    private sharedFormDataService: SharedFormDataService,
-    private categoryAdaptedService: CategoryAdaptedService
+    private sharedFormDataService: SharedFormDataService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.initFormDetail();
-    this.initCategories();
   }
 
   private initForm() : void {
@@ -36,10 +33,6 @@ export class FormDetailContainerComponent implements OnInit {
 
   private initFormDetail() : void {
     this.formDetails$ = this.formDetailAdaptedService.getFormDetailByIdClient(this.form.id);
-  }
-
-  private initCategories() : void {
-    this.categories$ = this.categoryAdaptedService.getAll();
   }
 
 }

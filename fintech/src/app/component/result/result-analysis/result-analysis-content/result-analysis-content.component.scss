@@ -1,6 +1,6 @@
 @use '../../../../../variable/style/mixin';
 
-.spider-chart-constainer {
+.spider-chart-container {
     @include mixin.width-height(700px, 700px);
     margin: 0 auto;
 
