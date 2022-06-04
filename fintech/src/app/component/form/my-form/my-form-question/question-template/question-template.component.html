@@ -23,8 +23,8 @@
                     [formControlName]="question.key" class="question-answer-text" (change)="setValue()">
 
                 <!-- Dropdown list  -->
-                <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue()">
-                    <option *ngFor="let answer of answers" [value]="answer.key" (change)="setObtainedPoints(answer.point)">
+                <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(); setObtainedPointsDropdown($event)">
+                    <option *ngFor="let answer of answers" [value]="answer | json">
                         {{answer.value}}
                     </option>
                 </select>

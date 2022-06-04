@@ -2,13 +2,4 @@
 	Form Detail
 </h1>
 
-<div>
-	{{ form | json }}
-</div>
-
-<br><br>
-
-<div *ngFor="let formDetail of formDetails$ | async as formDetails">
-	{{ formDetail | json }}
-	<br><br>
-</div>
+<app-form-detail-chart *ngIf="formDetails$ | async as formDetails" [formDetails]="formDetails" [form]="form" [categories]="(categories$ | async)!"></app-form-detail-chart>

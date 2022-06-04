@@ -1,3 +1,4 @@
+import { Answer } from "src/model/answer";
 import { Category } from "src/model/category";
 import { Question } from "src/model/question";
 
@@ -43,7 +44,7 @@ export class Utils {
 
         questions.forEach((question: Question<any>) => {
             points += question.obtainedPoints;
-        })
+        });
 
         return points;
     }
@@ -88,7 +89,7 @@ export class Utils {
      * @param start : la borne inf de l'intervalle de recherche
      * @param end : la borne sup de l'intervalle de recherche
      * @returns indice ou -1 selon que la recherche ait aboutit
-     */
+    */
     public binarySearchOverObject(array: any[], target: any, key: any, start: number, end: number) : any {
         if (start >= end) {
             return -1;
@@ -117,7 +118,7 @@ export class Utils {
      * @param array : tableau d'objet que l'on souhaite trier
      * @param key : l'attribut selon lequel la recherche va s'opérer
      * @returns any[] : tableau d'objets trier
-     */
+    */
     public sortByKey(array: any[], key: any) : any[] {
         return array.sort((obj_1: any, obj_2: any) => {
             let element_1 = obj_1[key];
@@ -128,22 +129,56 @@ export class Utils {
     }
 
     /**
-     * Méthode permettant de déterminer le nombre de points par catégories via le formulaire qui a été rempli.
+     * Méthode permettant de remplir les champs necessaire à la bonne utilisation d'une catégorie avec les données récoltés lors du formulaire.
      * 
      * @param questions : questions provenant du formulaire
      * @param categories : différentes cattégories de questions
-     * @returns Category[] : Tableau de categories avec le total de points obtenus
-     */
-    fillPointForCategories(questions: Question<any>[], categories: Category[]) : Category[] {
+     * @returns Category[] : Tableau de categories remplis avec les données récoltées lors du formulaire
+    */
+    public fillCategories(questions: Question<any>[], categories: Category[]) : Category[] {
         categories = this.sortByKey(categories, 'id');    
     
         questions.forEach((question) => {
             let categoryIndex = this.binarySearchOverObject(categories, question.idCategory, "id", 0, categories.length);
             
             categories[categoryIndex]["point"] += question.obtainedPoints;
+            categories[categoryIndex]["nbQuestion"] += 1;
+            categories[categoryIndex]["pointMax"] += this.getMaxPointForAnswer(question.answersLoaded);
         })
     
         return categories;
+    }
+
+    /**
+     * Méthode permettant de déterminer le nombre de point maximum qu'il est possible d'obtenir à une question donnée. 
+     * 
+     * @param answers : réponses possibles pour une question données
+     * @returns number : Correpond au nombre de point maximum que l'on peut obtenir pour une question donnée
+    */
+    public getMaxPointForAnswer(answers: Answer[]) : number {
+        return Math.max.apply(
+            Math,
+            answers.map((answer: Answer) => {
+                return answer.point;
+            })
+        );
+    }
+
+    /**
+     * Méthode permettant de rationner chacune des catégories afin de récupérer des résultats lisibles et homogènes.
+     * 
+     * @param categories : Tableau de Category correctement renseignées
+     * @returns number[] : Tableau de point par catégorie rationné
+     */
+    ratio(categories: Category[]) : number[] {
+        let res: number[] = [];
+    
+        categories.forEach((category: Category) => {
+          const ratio: number = category.point / category.pointMax * 10;
+          res.push(ratio);
+        })
+    
+        return res;
     }
 
 }

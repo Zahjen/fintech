@@ -27,8 +27,8 @@
                         </div>
 
                         <!-- Dropdown list -->
-                        <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(question)">
-                            <option *ngFor="let answer of question.answersLoaded" [value]="answer.key" [selected]="question.value == answer.key">
+                        <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(question); setObtainedPointsDropdown($event, question)">
+                            <option *ngFor="let answer of question.answersLoaded" [value]="answer | json" [selected]="question.value.value == answer.value">
                                 {{answer.value}}
                             </option>
                         </select>

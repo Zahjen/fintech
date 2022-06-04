@@ -36,7 +36,7 @@ export class ResultAnalysisContentComponent implements OnInit {
           labels: this.categoriesLabel,
           datasets: [{
               label: 'Questions repartition',
-              data: this.categoriesPoint,
+              data: this.utils.ratio(this.categories),
               backgroundColor: [
                   'rgba(102, 102, 102, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -62,7 +62,7 @@ export class ResultAnalysisContentComponent implements OnInit {
   }
 
   private initFillingPointCategories() : void {
-    this.utils.fillPointForCategories(this.questions, this.categories);
+    this.utils.fillCategories(this.questions, this.categories);
   }
 
   private initCategoriesLabelAndPoint() : void {

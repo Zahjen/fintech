@@ -1,6 +1,6 @@
 export interface IQuestion {
 
-    idQuestion: number; 
+    idQuestion: number;
     labelQuestion: string;
     type: string;
     idCategorie: number;

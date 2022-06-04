@@ -39,6 +39,11 @@ export class MyFormSumUpComponent implements OnInit {
     question['obtainedPoints'] = point;
   }
 
+  // Méthode permettant de mettre à jour les points attribués à chaque question de type dropdown
+  setObtainedPointsDropdown(event: any, question: Question<any>) : void {
+    question['obtainedPoints'] = JSON.parse(event.target.value).point;
+  }
+
   // Méthode permettant d'indiquer si un champ n'a pas été rempli
   isValid(question: Question<any>) {
     return this.form.controls[question.key].valid; 

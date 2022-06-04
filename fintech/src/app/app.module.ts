@@ -27,6 +27,7 @@ import { ThirdPartyContainerComponent } from './component/third-party/third-part
 import { ThirdPartyContentComponent } from './component/third-party/third-party-content/third-party-content.component';
 import { ResultAnalysisContainerComponent } from './component/result/result-analysis/result-analysis-container/result-analysis-container.component';
 import { ResultAnalysisContentComponent } from './component/result/result-analysis/result-analysis-content/result-analysis-content.component';
+import { FormDetailChartComponent } from './component/form/detail/form-detail-chart/form-detail-chart.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ResultAnalysisContentComponent } from './component/result/result-analys
     ThirdPartyContainerComponent,
     ThirdPartyContentComponent,
     ResultAnalysisContainerComponent,
-    ResultAnalysisContentComponent
+    ResultAnalysisContentComponent,
+    FormDetailChartComponent
   ],
   imports: [
     BrowserModule,

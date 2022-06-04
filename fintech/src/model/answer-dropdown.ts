@@ -5,9 +5,7 @@ import { Answer } from "./answer";
 // !: -> signifie qu'il y a obligation de définition
 // ?: -> signifie qu'il y a possibilité d'undefined
 export class AnswerDropdown extends Answer {
-    // Pas d'inspiration pour le nom de l'attribut, mais supposons que l'on souhaite une liste déroulante de pays, on a stocké dans la BdD les pays dans une table avec un idPays et un labelPays, ici idDropdown = idPays
-    //idDropdown: number;
-  
+ 
     constructor(
         options: {
             id?: number, 

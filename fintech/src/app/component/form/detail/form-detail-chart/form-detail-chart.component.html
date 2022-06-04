@@ -1,0 +1,16 @@
+<div>
+	{{ form | json }}
+</div>
+
+<br><br>
+
+<div>
+	{{ categories | json }}
+</div>
+
+<br><br>
+
+<div *ngFor="let formDetail of formDetails">
+	{{ formDetail | json }}
+	<br><br>
+</div>
