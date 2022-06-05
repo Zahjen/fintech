@@ -11,6 +11,7 @@ import { Form } from 'src/model/form';
 export class DashboardContainerComponent implements OnInit {
 
   forms$!: Observable<Form[]>;
+  latestForms$!: Observable<Form[]>;
 
   constructor(
     private formAdaptedService: FormAdaptedService
@@ -18,10 +19,15 @@ export class DashboardContainerComponent implements OnInit {
 
   ngOnInit() : void {
     this.initForms();
+    this.initLatestForms();
   }
 
   initForms() : void {
     this.forms$ = this.formAdaptedService.getFormByIdClient(1);
+  }
+
+  initLatestForms() : void {
+    this.latestForms$ = this.formAdaptedService.getLatestForms(1, 2);
   }
 
 }

@@ -1,5 +1,9 @@
 @use '../../../../../variable/style/mixin';
 
+.sub-title {
+    margin-bottom: 50px;
+}
+
 .buisness-line-distribution-container {
     @include mixin.width-height(100%, 600px);
     margin: 0 auto;

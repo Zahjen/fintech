@@ -1,5 +1,9 @@
 @use '../../../../../variable/style/mixin';
 
+.sub-title {
+    margin-bottom: 30px;
+}
+
 .gauge-risk-container {
     @include mixin.width-height(400px, 400px);
 

@@ -1,0 +1,9 @@
+<h2 class="sub-title">
+    Latest Forms
+</h2>
+
+<div class="item-container">
+    <div *ngFor="let form of forms">
+        <app-form-item [form]="form"></app-form-item>
+    </div>
+</div>
