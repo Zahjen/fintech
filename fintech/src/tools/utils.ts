@@ -1,4 +1,3 @@
-import { IObtainedPoint } from "src/app/interfaces/object-from-api/obtained-point";
 import { Answer } from "src/model/answer";
 import { Category } from "src/model/category";
 import { Question } from "src/model/question";
@@ -61,7 +60,7 @@ export class Utils {
         let risk: string = "";
 
         if (0 <= point && point <= 10) {
-            risk = "low";
+            risk = "Low";
         } else if (11 <= point && point <= 18) {
             risk = "Medium";
         } else if (19 <= point && point <= 24) {
@@ -182,7 +181,14 @@ export class Utils {
         return res;
     }
 
-    public contains(object: any, array: any[]) {
+    /**
+     * Méthode permettant de déterminer si oui ou non un objet est contenu dans un tableau.
+     * 
+     * @param object : L'objet pour lequel la vérification sera faite
+     * @param array : Le tableau dans lequel on va chercher si l'objet est contenu
+     * @returns boolean : oui ou non l'objet est contenu dans le tableau
+     */
+    public contains(object: any, array: any[]) : boolean {
         for (let i = 0; i < array.length; i++) {
             if (array[i].id === object.id) {
                 return true;

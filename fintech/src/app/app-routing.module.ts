@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardContainerComponent } from './component/dashboad/dashboard-container/dashboard-container.component';
+import { DashboardContainerComponent } from './component/dashboard/dashboard-container/dashboard-container.component';
 import { FormDetailContainerComponent } from './component/form/detail/form-detail-container/form-detail-container.component';
 import { MyFormQuestionnaireContainerComponent } from './component/form/my-form/my-form-questionnaire-container/my-form-questionnaire-container/my-form-questionnaire-container.component';
 import { MyFormSumUpComponent } from './component/form/my-form/my-form-sum-up/my-form-sum-up.component';

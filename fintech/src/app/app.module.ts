@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { BodyComponent } from './component/body/body.component';
-import { DashboardContainerComponent } from './component/dashboad/dashboard-container/dashboard-container.component';
+import { DashboardContainerComponent } from './component/dashboard/dashboard-container/dashboard-container.component';
 import { FormContainerComponent } from './component/form/overview/form-container/form-container.component';
 import { FormContainerItemComponent } from './component/form/overview/form-container-item/form-container-item.component';
 import { FormItemComponent } from './component/form/overview/form-item/form-item.component';
@@ -29,6 +29,9 @@ import { ResultAnalysisContainerComponent } from './component/result/result-anal
 import { ResultAnalysisContentComponent } from './component/result/result-analysis/result-analysis-content/result-analysis-content.component';
 import { FormDetailChartComponent } from './component/form/detail/form-detail-chart/form-detail-chart.component';
 import { FormDetailAnswerComponent } from './component/form/detail/form-detail-answer/form-detail-answer.component';
+import { OverallRiskDistributionComponent } from './component/dashboard/dashboard-chart/overall-risk-distribution/overall-risk-distribution.component';
+import { RiskGaugeComponent } from './component/dashboard/dashboard-chart/risk-gauge/risk-gauge.component';
+import { BuisnessLineDistributionComponent } from './component/dashboard/dashboard-chart/buisness-line-distribution/buisness-line-distribution.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { FormDetailAnswerComponent } from './component/form/detail/form-detail-a
     ResultAnalysisContainerComponent,
     ResultAnalysisContentComponent,
     FormDetailChartComponent,
-    FormDetailAnswerComponent
+    FormDetailAnswerComponent,
+    OverallRiskDistributionComponent,
+    RiskGaugeComponent,
+    BuisnessLineDistributionComponent
   ],
   imports: [
     BrowserModule,

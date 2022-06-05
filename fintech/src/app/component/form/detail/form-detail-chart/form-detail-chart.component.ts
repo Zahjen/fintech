@@ -9,7 +9,6 @@ import { ThirdParty } from 'src/model/third-party';
 import { Answer } from 'src/model/answer';
 import { IObtainedPoint } from 'src/app/interfaces/object-from-api/obtained-point';
 import { formDetailAnswer } from 'src/variable/script/router-link';
-import { Router } from '@angular/router';
 Chart.register(...registerables);
 
 @Component({
@@ -42,7 +41,7 @@ export class FormDetailChartComponent implements OnInit {
     this.initCategoriesLabelAndPoint();
 
     const myChart = new Chart("chart", {
-      type: 'bar',
+      type: 'radar',
       data: {
           labels: this.categoriesLabel,
           datasets: [{
