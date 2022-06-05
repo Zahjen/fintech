@@ -47,12 +47,16 @@ export class OverallRiskDistributionComponent implements OnInit {
         ChartDataLabels
       ],
       options: {
+        responsive: true,
         plugins: {
           datalabels: {
             formatter: (value) => {
               return value === 0 ? '' : Number(value / this.forms.length * 100).toFixed(2) + ' %';
             },
             color: 'rgb(0,0,0)',
+          },
+          legend: {
+            onClick: () => {}
           }
         }
       },

@@ -1,10 +1,9 @@
 @use '../../../../../variable/style/mixin';
 
-.spider-chart-container {
+.overall-risk-container {
     @include mixin.width-height(400px, 400px);
-    margin: 0 auto;
 
-    canvas {
+    canvas#overall-risk {
         width: 400px;
         height: 400px;
     }

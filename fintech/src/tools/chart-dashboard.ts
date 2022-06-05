@@ -59,7 +59,7 @@ export class ChartDashboard {
         return data;
     }
 
-    public meanRisk(forms: Form[]) {
+    public meanRisk(forms: Form[]) : number {
         let sum: number = 0;
 
         forms.forEach((form: Form) => {
@@ -67,6 +67,61 @@ export class ChartDashboard {
         })
 
         return sum / forms.length;
+    }
+
+    public buisnessLineArray(forms: Form[]) : any[] {
+        let formsByBuisnessLine : any = {}
+
+        forms.forEach((form: Form) => {
+            if (!formsByBuisnessLine.hasOwnProperty(form.labelBuisnessLine)) {
+                formsByBuisnessLine[form.labelBuisnessLine] = {
+                    low: 0,
+                    medium: 0,
+                    high: 0, 
+                    critical: 0
+                };
+            } 
+
+            let risk: string = this.utils.inherentRisk(form.totalPoint);
+
+            if (risk === "Low") {
+                formsByBuisnessLine[form.labelBuisnessLine]["low"] += 1;
+            } else if (risk === "Medium") {
+                formsByBuisnessLine[form.labelBuisnessLine]["medium"] += 1;
+            } else if (risk === "High") {
+                formsByBuisnessLine[form.labelBuisnessLine]["high"] += 1;
+            } else if (risk === "Critical") {
+                formsByBuisnessLine[form.labelBuisnessLine]["critical"] += 1;
+            }   
+        })
+
+        console.log(formsByBuisnessLine)
+
+        return formsByBuisnessLine;
+    }
+
+    public fillDataSets(datas: any) {
+        let datasets: any[] = [];
+
+        let label: any[] = [];
+        let low: number[] = []
+        let medium: number[] = []
+        let high: number[] = []
+        let critical: number[] = []
+
+        Object.keys(datas).forEach((data: any) => {
+            label.push(data);
+        })
+
+        Object.values(datas).forEach((data: any) => {
+            low.push(data['low'])
+            medium.push(data['medium'])
+            high.push(data['high'])
+            critical.push(data['critical'])
+        })
+
+
+        return [label, low, medium, high, critical];
     }
 
 

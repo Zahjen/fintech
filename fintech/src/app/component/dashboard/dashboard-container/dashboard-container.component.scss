@@ -1,11 +1,7 @@
 @use '../../../../variable/style/mixin';
 
-.spider-chart-container {
-    @include mixin.width-height(400px, 400px);
-    margin: 0 auto;
-
-    canvas {
-        width: 400px;
-        height: 400px;
-    }
+.semi-circular-container {
+    @include mixin.width-height(100%, auto);
+    @include mixin.flex(row, space-between, center);
+    flex-wrap: wrap;
 }

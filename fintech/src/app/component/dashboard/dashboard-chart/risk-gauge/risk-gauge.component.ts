@@ -53,11 +53,15 @@ export class RiskGaugeComponent implements OnInit {
       },
       options: {
         cutout: 0,
+        responsive: true,
         plugins: {
           tooltip: {
             enabled: false
+          },
+          legend: {
+            onClick: () => {}
           }
-        }
+        },
     }
     });
 

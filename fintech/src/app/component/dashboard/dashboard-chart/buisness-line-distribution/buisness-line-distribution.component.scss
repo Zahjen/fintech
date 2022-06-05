@@ -1,0 +1,11 @@
+@use '../../../../../variable/style/mixin';
+
+.buisness-line-distribution-container {
+    @include mixin.width-height(100%, 600px);
+    margin: 0 auto;
+
+    canvas#buisness-line-distribution {
+        width: 100%;
+        height: 600px;
+    }
+}

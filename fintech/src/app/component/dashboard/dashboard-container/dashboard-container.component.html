@@ -1,5 +1,9 @@
 <h1>Hello</h1>
 
-<app-overall-risk-distribution *ngIf="forms$ | async as forms" [forms]="forms"></app-overall-risk-distribution>
+<div class="semi-circular-container">
+    <app-overall-risk-distribution *ngIf="forms$ | async as forms" [forms]="forms"></app-overall-risk-distribution>
 
-<app-risk-gauge *ngIf="forms$ | async as forms" [forms]="forms"></app-risk-gauge>
+    <app-risk-gauge *ngIf="forms$ | async as forms" [forms]="forms"></app-risk-gauge>
+</div>
+    
+<app-buisness-line-distribution *ngIf="forms$ | async as forms" [forms]="forms"></app-buisness-line-distribution>
