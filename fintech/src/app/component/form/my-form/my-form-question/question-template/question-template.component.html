@@ -12,7 +12,7 @@
                 <div *ngSwitchCase="'radio'" class="question-answer-radio-container">
                     <label *ngFor="let answer of answers" class="question-answer-radio-item">
                         <input type="radio" class="question-answer-radio-input" [name]="question.key"
-                            [formControlName]="question.key" [value]="answer.key"
+                            [formControlName]="question.key" [value]="answer"
                             (change)="setValue(); setObtainedPoints(answer.point)">
                         <span> {{ answer.value }} </span>
                     </label>
@@ -23,7 +23,7 @@
                     [formControlName]="question.key" class="question-answer-text" (change)="setValue()">
 
                 <!-- Dropdown list  -->
-                <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(); setObtainedPointsDropdown($event)">
+                <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(); setObtainedPointsDropdownAndFormData($event)">
                     <option *ngFor="let answer of answers" [value]="answer | json">
                         {{answer.value}}
                     </option>

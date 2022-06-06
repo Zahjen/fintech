@@ -9,6 +9,7 @@ import { ThirdParty } from 'src/model/third-party';
 import { Answer } from 'src/model/answer';
 import { IObtainedPoint } from 'src/app/interfaces/object-from-api/obtained-point';
 import { formDetailAnswer } from 'src/variable/script/router-link';
+import { radar, radarBorder } from 'src/variable/script/color';
 Chart.register(...registerables);
 
 @Component({
@@ -20,6 +21,9 @@ export class FormDetailChartComponent implements OnInit {
 
   @Input() formDetails!: FormDetail[];
   @Input() form!: Form;
+
+  radarColor = radar;
+  radarBorder = radarBorder;
 
   formDetailAnswer = formDetailAnswer;
 
@@ -48,22 +52,29 @@ export class FormDetailChartComponent implements OnInit {
               label: 'Questions repartition',
               data: this.utils.ratio(this.categories),
               backgroundColor: [
-                  'rgba(102, 102, 102, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)'
+                  this.radarColor.operating,
+                  this.radarColor.regulatory,
+                  this.radarColor.reputational,
+                  this.radarColor.sectorial,
+                  this.radarColor.miscellaneous
               ],
               borderColor: [
-                  'rgba(102, 102, 102, 0.8)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)'
+                  this.radarColor.operating,
+                  this.radarColor.regulatory,
+                  this.radarColor.reputational,
+                  this.radarColor.sectorial,
+                  this.radarColor.miscellaneous
               ],
               borderWidth: 1
           }]
       },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
     });
   }
 

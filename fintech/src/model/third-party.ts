@@ -6,7 +6,7 @@ export class ThirdParty {
         id?: number;
         label?: string
     } = {}) {
-        this.id = options.id === undefined ? 1 : options.id;
+        this.id = options.id === undefined ? -1 : options.id;
         this.label = options.label || '';
     }
 }

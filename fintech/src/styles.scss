@@ -94,7 +94,8 @@ app-result-container,
 app-result-analysis-container,
 app-third-party-container,
 app-form-detail-container,
-app-dashboard-container {
+app-dashboard-container,
+app-form-container {
     @include mixin.width-height(100%, auto);
 }
 
@@ -105,7 +106,8 @@ app-result-container,
 app-result-analysis-container,
 app-third-party-container,
 app-form-detail-container,
-app-dashboard-container {
+app-dashboard-container,
+app-form-container {
     max-width: 1100px;
     margin: 0 auto;
 }

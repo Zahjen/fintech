@@ -6,7 +6,7 @@
     Please note that you can still edit the following answers.
 </div>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
+<form (ngSubmit)="onSubmit(questions)" [formGroup]="form">
 
     <div class="sum-up-border">
         <div class="sum-up-container">
@@ -21,13 +21,13 @@
                         <!-- WARNING : Il y a un ordre précis à respecter pour recuérer la valeur de l'input :') i.e. type -> name -> formControlName -> value -> classe -->
                         <div *ngSwitchCase="'radio'" class="question-answer-radio-container">
                         <label *ngFor="let answer of question.answersLoaded" class="question-answer-radio-item">
-                            <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer.key" [checked]="question.value == answer.key" class="question-answer-radio-input" (change)="setValue(question); setObtainedPoints(question, answer.point)"> 
+                            <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="answer" [checked]="question.value.value == answer.value" class="question-answer-radio-input" (change)="setValue(question); setObtainedPoints(question, answer.point)"> 
                             <span> {{ answer.value }} </span>
                         </label>
                         </div>
 
                         <!-- Dropdown list -->
-                        <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(question); setObtainedPointsDropdown($event, question)">
+                        <select [name]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="question-answer-select-container" (change)="setValue(question); setObtainedPointsDropdownAndFormData($event, question)">
                             <option *ngFor="let answer of question.answersLoaded" [value]="answer | json" [selected]="question.value.value == answer.value">
                                 {{answer.value}}
                             </option>

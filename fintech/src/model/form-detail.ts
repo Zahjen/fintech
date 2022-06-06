@@ -32,7 +32,7 @@ export class FormDetail {
         this.labelCategory = options.labelCategory || '';
         this.idChosenAnswer = options.idChosenAnswer === undefined ? -1 : options.idChosenAnswer;
         this.labelChosenAnswer = options.labelChosenAnswer || '';
-        this.obtainedPoint = options.obtainedPoint === undefined ? -1 : options.obtainedPoint;
+        this.obtainedPoint = options.obtainedPoint === undefined ? 0 : options.obtainedPoint;
         this.pointMax = options.pointMax || [];
     }
 }

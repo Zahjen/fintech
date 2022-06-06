@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { Dao } from 'src/app/interfaces/dao';
 import { IAnswerForm } from 'src/app/interfaces/object-from-api/answer-form';
+import { IFormToApi } from 'src/app/interfaces/object-send-to-api/form';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,12 @@ export class FormAnswerService implements Dao<IAnswerForm> {
   getAnswerFormByIdFormIdQuestion(idForm: number, idQuestion: number) : Observable<IAnswerForm> {
     return this.httpClient
       .get<IAnswerForm>(this.urlBase + `${idForm}` + '/' + `${idQuestion}`);
+  }
+
+  addHero(form: IFormToApi) {
+    const headers = {'content-type': 'application/json'}  
+    const body = JSON.stringify(form);
+
+    return this.httpClient.post(this.urlBase, body, {'headers':headers, responseType: 'text'})
   }
 }

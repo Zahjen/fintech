@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AnswerAdapter } from 'src/adapter/answer-adapter';
 import { IAdaptedAnswer } from 'src/app/interfaces/object-adapted/answer-adapted';
 import { Answer } from 'src/model/answer';

@@ -1,4 +1,23 @@
 @use "../../../../../../variable/style/mixin";
+@use "../../../../../../variable/style/color";
+
+.my-form-question-container #progress-bar[value] {
+    @include mixin.width-height(100%, 15px);
+    -webkit-appearance: none;
+    appearance: none;
+}
+.my-form-question-container #progress-bar[value]::-webkit-progress-bar {
+    @include mixin.border-radius(15px);
+    background-color: color.$secondary;
+}
+.my-form-question-container #progress-bar[value]::-webkit-progress-value {
+    @include mixin.border-radius(15px);
+    background: color.$progress;
+}
+
+// .my-form-question-container #progress-bar {
+//     @include mixin.width-height(100%, 30px);
+// }
 
 .my-form-question-container .question-item-container {
     @include mixin.width-height(700px, 400px);

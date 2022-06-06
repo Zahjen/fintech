@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IForm } from 'src/app/interfaces/object-from-api/form';
 import { Answer } from 'src/model/answer';
 import { Question } from 'src/model/question';
 import { sumUpMyForm } from 'src/variable/script/router-link';
@@ -17,6 +18,7 @@ export class QuestionContainerComponent implements OnInit {
   @Input() answers!: Answer[];
   @Input() questions!: Question<string>[];
   @Input() index!: number;
+  @Input() formData!: IForm;
 
   sumUpMyForm = sumUpMyForm;
 
@@ -47,19 +49,19 @@ export class QuestionContainerComponent implements OnInit {
     }
   }
 
-  // Méthode permettant d'affiche le sum up tout en verifiant que le dernier champ a bien été rempli
-  goToSumUp(index: number) : void {
-    if (index === this.questions.length - 1 && this.isValid) {
-      this.router.navigate([sumUpMyForm.routeLink]);
-    }
-  }
-
   // Méthode permettant de passer à la question précédente. 
   // En cliquanrt sur le bouton, on va masquer la question courante et démaquer la question précédente 
   previousButton(index: number) : void {
     if (index > 0) {
       this.questions[index].isHidden = true;
       this.questions[index - 1] ? this.questions[index - 1].isHidden = false : false;
+    }
+  }
+
+  // Méthode permettant d'affiche le sum up tout en verifiant que le dernier champ a bien été rempli
+  goToSumUp(index: number) : void {
+    if (index === this.questions.length - 1 && this.isValid) {
+      this.router.navigate([sumUpMyForm.routeLink]);
     }
   }
 

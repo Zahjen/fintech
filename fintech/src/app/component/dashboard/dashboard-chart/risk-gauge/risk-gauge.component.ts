@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Form } from 'src/model/form';
 import { ChartDashboard } from 'src/tools/chart-dashboard';
 import { Chart, registerables } from 'chart.js';
+import { color, colorBorder } from 'src/variable/script/color';
 Chart.register(...registerables);
 
 @Component({
@@ -12,6 +13,9 @@ Chart.register(...registerables);
 export class RiskGaugeComponent implements OnInit {
 
   @Input() forms!: Form[];
+
+  color = color;
+  colorBorder = colorBorder;
 
   private chartDashboard: ChartDashboard = ChartDashboard.getInstance();
 
@@ -26,16 +30,16 @@ export class RiskGaugeComponent implements OnInit {
               label: 'Questions repartition',
               data: [10, 18, 24, 52],
               backgroundColor: [
-                'rgba(206, 206, 206, 0.5)',
-                'rgba(150, 150, 150, 0.5)',
-                'rgba(102, 102, 102, 0.5)',
-                'rgba(50, 50, 50, 0.5)',
+                this.color.low,
+                this.color.medium,
+                this.color.high,
+                this.color.critical,
               ],
               borderColor: [
-                'rgba(206, 206, 206, 1)',
-                'rgba(150, 150, 150, 1)',
-                'rgba(102, 102, 102, 1)',
-                'rgba(50, 50, 50, 1)',
+                this.colorBorder.low,
+                this.colorBorder.medium,
+                this.colorBorder.high,
+                this.colorBorder.critical
               ],
               borderWidth: 1,
               circumference: 180,

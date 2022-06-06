@@ -1,10 +1,13 @@
 <div [hidden]="question.isHidden" class="my-form-question-container">
 
+	<progress id="progress-bar" [value]="index / questions.length">{{ index / questions.length }}%</progress>
+
 	<div class="question-item-container">
 		<app-question-template 
 			[form]="myForm" 
 			[question]="question"
 			[answers]="answers"
+			[formData]="formData"
 		></app-question-template>
 	</div>
 

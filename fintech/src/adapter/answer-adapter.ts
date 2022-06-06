@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Adapter } from "src/app/interfaces/adapter";
 import { IAdaptedAnswer } from "src/app/interfaces/object-adapted/answer-adapted";
-import { IAnswer } from "src/app/interfaces/object-from-api/answer";
 import { Answer } from "src/model/answer";
 
 @Injectable({

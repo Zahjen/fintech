@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Form } from 'src/model/form';
 import { ChartDashboard } from 'src/tools/chart-dashboard';
 import { Chart, registerables } from 'chart.js';
+import { color, colorBorder } from 'src/variable/script/color';
 Chart.register(...registerables);
 
 @Component({
@@ -12,6 +13,9 @@ Chart.register(...registerables);
 export class BuisnessLineDistributionComponent implements OnInit {
 
   @Input() forms!: Form[];
+
+  color = color;
+  colorBorder = colorBorder;
 
   private chartDashboard: ChartDashboard = ChartDashboard.getInstance();
 
@@ -29,10 +33,10 @@ export class BuisnessLineDistributionComponent implements OnInit {
               label: 'Low',
               data: datasets[1],
               backgroundColor: [
-                'rgba(206, 206, 206)',
+                this.color.low,
               ],
               borderColor: [
-                'rgba(206, 206, 206)',
+                this.colorBorder.low,
               ],
               borderWidth: 1,
             },
@@ -40,10 +44,10 @@ export class BuisnessLineDistributionComponent implements OnInit {
               label: 'Medium',
               data: datasets[2],
               backgroundColor: [
-                'rgba(150, 150, 150)',
+                this.color.medium,
               ],
               borderColor: [
-                'rgba(150, 150, 150)',
+                this.colorBorder.medium,
               ],
               borderWidth: 1,
             },
@@ -51,10 +55,10 @@ export class BuisnessLineDistributionComponent implements OnInit {
               label: 'High',
               data: datasets[3],
               backgroundColor: [
-                'rgba(102, 102, 102)',
+                this.color.high,
               ],
               borderColor: [
-                'rgba(102, 102, 102)',
+                this.colorBorder.high,
               ],
               borderWidth: 1,
             },
@@ -62,10 +66,10 @@ export class BuisnessLineDistributionComponent implements OnInit {
               label: 'Critical',
               data: datasets[4],
               backgroundColor: [
-                'rgba(50, 50, 50)',
+                this.color.critical,
               ],
               borderColor: [
-                'rgba(50, 50, 50)',
+                this.colorBorder.critical,
               ],
               borderWidth: 1,
             },

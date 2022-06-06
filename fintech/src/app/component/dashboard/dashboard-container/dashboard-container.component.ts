@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IClient } from 'src/app/interfaces/object-from-api/client';
 import { FormAdaptedService } from 'src/app/services/adapted-data/form-adapted/form-adapted.service';
+import { ShareDataClientService } from 'src/app/services/shared/share-client-data/share-data-client.service';
 import { Form } from 'src/model/form';
 
 @Component({
@@ -12,22 +14,29 @@ export class DashboardContainerComponent implements OnInit {
 
   forms$!: Observable<Form[]>;
   latestForms$!: Observable<Form[]>;
+  client!: IClient;
 
   constructor(
-    private formAdaptedService: FormAdaptedService
+    private formAdaptedService: FormAdaptedService,
+    private shareDataClientService: ShareDataClientService
   ) {}
 
   ngOnInit() : void {
+    this.initClient();
     this.initForms();
     this.initLatestForms();
   }
 
-  initForms() : void {
-    this.forms$ = this.formAdaptedService.getFormByIdClient(1);
+  private initClient() : void {
+    this.client = this.shareDataClientService.getclient();
   }
 
-  initLatestForms() : void {
-    this.latestForms$ = this.formAdaptedService.getLatestForms(1, 2);
+  private initForms() : void {
+    this.forms$ = this.formAdaptedService.getFormByIdClient(this.client.idClient);
+  }
+
+  private initLatestForms() : void {
+    this.latestForms$ = this.formAdaptedService.getLatestForms(this.client.idClient, 2);
   }
 
 }

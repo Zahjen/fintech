@@ -40,9 +40,7 @@ export class FormAdaptedService {
       .getFormByIdClient(idClient)
       .pipe(
         map((forms: IAdaptedForm[]) => {
-          this.utils.sortByKey(forms, 'id');
-
-          return forms.slice(-number).map((form: IAdaptedForm) => {
+          return forms.slice(0, number).map((form: IAdaptedForm) => {
             return this.formAdapter.adapt(form);
           })
         })

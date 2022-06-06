@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Answer } from 'src/model/answer';
-import { AnswerDropdown } from 'src/model/answer-dropdown';
+import { IForm } from 'src/app/interfaces/object-from-api/form';
 import { Form } from 'src/model/form';
 import { Question } from 'src/model/question';
 import { ThirdParty } from 'src/model/third-party';
@@ -16,6 +13,8 @@ export class SharedFormDataService {
   pointsByQuestionCategorie: number[] = [];
 
   form!: Form;
+
+  formData!: IForm;
 
   chosenThirdParty!: ThirdParty;
  
@@ -55,6 +54,14 @@ export class SharedFormDataService {
 
   setForm(form: Form) : void {
     this.form = form;
+  }
+  
+  getFormData() : IForm {
+    return this.formData;
+  }
+
+  setFormData(formData: IForm) : void {
+    this.formData = formData;
   }
 
 }
