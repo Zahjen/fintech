@@ -11,6 +11,8 @@ class FormAnswerController {
     private $id_form;
     private $id_question;
     private $form_answer_manager;
+    private $third_party_manager;
+    private $form_manager;
 
     // --------------------
     // Constructeur
@@ -22,6 +24,8 @@ class FormAnswerController {
         $this->id_form = $id_form;
         $this->id_question = $id_question;
         $this->form_answer_manager = new ReponseFormulaireManager($db);
+        $this->third_party_manager = new PrestataireManager($db);
+        $this->form_manager = new FormulaireManager($db);
     }
 
     // --------------------
@@ -122,16 +126,41 @@ class FormAnswerController {
 
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        if (!$this->is_form_answer_valid($input)) {
+        /*if (!$this->is_form_answer_valid($input)) {
             return $this->not_executable_query();
+        }*/
+
+        echo json_encode($input);
+
+        if ($input['thirdParty']['idPrestataire'] === -1) {
+            $third_party = new Prestataire();
+            $third_party->hydrate($input['thirdParty']);
+            $this->third_party_manager->add($third_party);      
+            $last_id = $this->db->lastInsertId();
+            $input['form']['idPrestataire'] = (int) $last_id;
+        } else {
+            $input['form']['idPrestataire'] = (int) $input['thirdParty']['idPrestataire'];
         }
 
-        $this->form_answer_manager->insert($input);
+        $form = new Formulaire();
+        $form->hydrate($input['form']);
+
+        $this->form_manager->add($form);
+        $last_form_id = $this->db->lastInsertId();
+
+        echo json_encode($form);
+
+        foreach($input['formAnswer'] as $form_answer) {
+            $form_answer['idFormulaire'] = (int) $last_form_id;
+            $form_answer_obj = new ReponseFormulaire();
+            $form_answer_obj->hydrate($form_answer);
+            $this->form_answer_manager->add($form_answer_obj);
+        }
+    
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
         return $response;
-
     }
 
     // Méthode permettant de mettre à jour un formulaire selon son id

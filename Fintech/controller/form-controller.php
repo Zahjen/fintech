@@ -12,6 +12,7 @@ class FormController {
     private $form;
     private $id_client;
     private $form_manager;
+    private $third_party_manager;
     private $form_adapter;
 
     // --------------------
@@ -25,6 +26,7 @@ class FormController {
         $this->form = $form;
         $this->id_client = $id_client;
         $this->form_manager = new FormulaireManager($db);
+        $this->third_party_manager = new PrestataireManager($db);
         $this->form_adapter = new FormAdapter($db);
     }
 
@@ -126,7 +128,24 @@ class FormController {
             return $this->not_executable_query();
         }
 
-        $this->form_manager->insert($input);
+        echo json_encode($input);
+
+        if (!array_key_exists("idPrestataire", $input['thirdParty'])) {
+            $third_party = new Prestataire();
+            $third_party->hydrate($input['thirdParty']);
+            $this->third_party_manager->add($third_party);      
+            $last_id = $this->db->lastInsertId();
+            $input['form']['idPrestataire'] = (int) $last_id;
+        } else {
+            $input['form']['idPrestataire'] = (int) $input['thirdParty']['idPrestataire'];
+        }
+
+        $form = new Formulaire();
+        $form->hydrate($input['form']);
+
+        echo json_encode($form);
+
+        $this->form_manager->add($form);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
@@ -177,7 +196,7 @@ class FormController {
     // Méthode permettant de vérifier qu'une réponse est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
     private function is_form_valid($input) {
 
-        return isset($input['idClient']) && isset($input['idPrestataire']) && isset($input['idSecteur']);
+        return isset($input['form']['idClient']) && isset($input['form']['idSecteur']) && isset($input['form']['idPays']) && isset($input['form']['totalPoints']);
 
     }
 
