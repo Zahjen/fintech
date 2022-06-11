@@ -102,7 +102,10 @@ class ThirdPartyController {
             return $this->not_executable_query();
         }
 
-        $this->third_party_manager->insert($input);
+        $third_party = new Prestataire();
+        $third_party->hydrate($input);
+
+        $this->third_party_manager->add($third_party);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 

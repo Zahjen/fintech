@@ -38,18 +38,6 @@ class FormDetailController {
                 };
                 break;
 
-            case 'POST':
-                $response = $this->insert();
-                break;
-
-            case 'PUT':
-                $response = $this->update($this->id_form);
-                break;
-
-            case 'DELETE':
-                $response = $this->delete($this->id_form);
-                break;
-
             default:
                 $response = $this->not_found_query();
                 break;

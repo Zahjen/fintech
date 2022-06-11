@@ -18,7 +18,7 @@
         public function getById(int $id) {
             $monFormulaire = null;
             try {
-                $req = $this->bdd->prepare('SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire WHERE idFormulaire = ?');
+                $req = $this->bdd->prepare('SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire WHERE idFormulaire = ? ORDER BY idFormulaire DESC');
                 $req->execute(array($id));
                 $donnees = $req->fetch(PDO::FETCH_ASSOC);
                 $monFormulaire = new Formulaire();
@@ -32,7 +32,7 @@
         public function getByIdClient(int $id) {
             $monFormulaire = null;
             try {
-                $req = $this->bdd->prepare( 'SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire WHERE idClient = :idClient');
+                $req = $this->bdd->prepare( 'SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire WHERE idClient = :idClient ORDER BY idFormulaire DESC');
                 $req->bindValue(':idClient', $id, PDO::PARAM_INT);
                 $req->execute();
                 while ($donnees = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -49,7 +49,7 @@
         public function getAll() {
             $listeFormulaires = [];
             try {
-                $req = $this->bdd->prepare( 'SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire');
+                $req = $this->bdd->prepare( 'SELECT idFormulaire,idClient,idPrestataire,idSecteur, idPays, totalPoints FROM formulaire ORDER BY idFormulaire DESC');
                 $req->execute();
                 while ($donnees = $req->fetch(PDO::FETCH_ASSOC)) {
                     $form = new Formulaire();
@@ -64,7 +64,7 @@
 
         public function add(Formulaire $formulaire){
             try {
-                $req = $this->bdd->prepare(' INSERT INTO formulaire(idClient, idPrestataire, idSecteur, idPays, totalPoints) VALUES(:idClient, :idPrestataire, :idSecteur, :totalPoints) ');
+                $req = $this->bdd->prepare('INSERT INTO formulaire(idClient, idPrestataire, idSecteur, idPays, totalPoints) VALUES(:idClient, :idPrestataire, :idSecteur, :idPays, :totalPoints) ');
                 $req->bindValue(':idClient', $formulaire->getIdClient(), PDO::PARAM_INT);
                 $req->bindValue(':idPrestataire', $formulaire->getIdPrestataire(), PDO::PARAM_INT);
                 $req->bindValue(':idSecteur', $formulaire->getIdSecteur(), PDO::PARAM_INT);

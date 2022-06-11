@@ -128,7 +128,7 @@ class ObtainedPointController {
             return $this->not_executable_query();
         }
 
-        $this->obtained_point_manager->insert($input);
+        $this->obtained_point_manager->add($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 

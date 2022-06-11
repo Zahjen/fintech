@@ -40,6 +40,7 @@ class FormDetailAdapter {
             $question = $this->question_manager->getById($form_answer->getIdQuestion());
             $chosen_answer = $this->answer_manager->getById($form_answer->getIdReponsePresta());
             $category = $this->category_manager->getById($question->getIdCategorie());
+            $pointMax = $this->obtained_point_manager->getById($form_answer->getIdQuestion());
             $obtained_point = $this->obtained_point_manager->getByIdQuestionIdReponse($form_answer->getIdQuestion(), $form_answer->getIdReponsePresta());
 
             $array_data_form = array(
@@ -47,7 +48,8 @@ class FormDetailAdapter {
                 "question" => $question,
                 "chosenAnswer" => $chosen_answer,
                 "category" => $category,
-                "obtainedPoint" => $obtained_point
+                "obtainedPoint" => $obtained_point,
+                "pointMax" => $pointMax
             );
 
             $form_answer_adapted[] = $array_data_form;
@@ -66,6 +68,7 @@ class FormDetailAdapter {
             $question = $this->question_manager->getById($form_answer->getIdQuestion());
             $chosen_answer = $this->answer_manager->getById($form_answer->getIdReponsePresta());
             $category = $this->category_manager->getById($question->getIdCategorie());
+            $pointMax = $this->obtained_point_manager->getById($form_answer->getIdQuestion());
             $obtained_point = $this->obtained_point_manager->getByIdQuestionIdReponse($form_answer->getIdQuestion(), $form_answer->getIdReponsePresta());
 
             $array_data_form = array(
@@ -73,7 +76,8 @@ class FormDetailAdapter {
                 "question" => $question,
                 "chosenAnswer" => $chosen_answer,
                 "category" => $category,
-                "obtainedPoint" => $obtained_point
+                "obtainedPoint" => $obtained_point,
+                "pointMax" => $pointMax
             );
 
             $form_answer_adapted[] = $array_data_form;

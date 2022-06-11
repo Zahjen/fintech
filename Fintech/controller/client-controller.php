@@ -102,7 +102,7 @@ class ClientController {
             return $this->not_executable_query();
         }
 
-        $this->client_manager->insert($input);
+        $this->client_manager->add($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 

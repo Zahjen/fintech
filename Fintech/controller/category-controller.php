@@ -102,7 +102,7 @@ class CategoryController {
             return $this->not_executable_query();
         }
 
-        $this->category_manager->insert($input);
+        $this->category_manager->add($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
 
