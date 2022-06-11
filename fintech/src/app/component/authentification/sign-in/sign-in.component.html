@@ -1,0 +1,33 @@
+<div class="sign-in">
+    <div class="sign-in-container">
+        <div class="sign-in-logo">
+            LOGO
+        </div>
+        
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+            <div *ngFor="let question of questions" class="input-container">
+                
+                <label [for]="question.key">{{ question.label }}</label>
+
+                <input [type]="question.type" [name]="question.key"
+                [formControlName]="question.key" class="question-answer-text" [id]="question.key">
+
+                <div class="error-message" *ngIf="!isValid(question)">Please, this field is required</div>
+
+            </div>
+            
+            <input type="submit" value="Sign In" class="button-fill submit-button">
+            
+        </form>
+    </div>
+
+    <div *ngIf="signInMessage$ | async as signInMessage" class="error-message-from-php">
+        {{ signInMessage.message }}
+    </div>
+</div>
+
+
+<pre>
+    {{form.value | json}}
+</pre>

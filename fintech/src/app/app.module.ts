@@ -33,6 +33,7 @@ import { OverallRiskDistributionComponent } from './component/dashboard/dashboar
 import { RiskGaugeComponent } from './component/dashboard/dashboard-chart/risk-gauge/risk-gauge.component';
 import { BuisnessLineDistributionComponent } from './component/dashboard/dashboard-chart/buisness-line-distribution/buisness-line-distribution.component';
 import { DashboardLatestFormComponent } from './component/dashboard/dashboard-latest-form/dashboard-latest-form.component';
+import { SignInComponent } from './component/authentification/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DashboardLatestFormComponent } from './component/dashboard/dashboard-la
     OverallRiskDistributionComponent,
     RiskGaugeComponent,
     BuisnessLineDistributionComponent,
-    DashboardLatestFormComponent
+    DashboardLatestFormComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

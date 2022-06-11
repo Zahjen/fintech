@@ -30,5 +30,5 @@ export class FormService implements Dao<IForm> {
     getFormByIdClient(idClient: number) : Observable<IAdaptedForm[]> {
         return this.httpClient
           .get<IAdaptedForm[]>(this.urlBase + `adapt` + '/' + `${idClient}`);
-      }
+    }
 }

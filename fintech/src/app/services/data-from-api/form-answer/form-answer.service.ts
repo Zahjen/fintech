@@ -32,7 +32,7 @@ export class FormAnswerService implements Dao<IAnswerForm> {
       .get<IAnswerForm>(this.urlBase + `${idForm}` + '/' + `${idQuestion}`);
   }
 
-  addHero(form: IFormToApi) {
+  insertForm(form: IFormToApi) {
     const headers = {'content-type': 'application/json'}  
     const body = JSON.stringify(form);
 

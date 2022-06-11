@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ShareDataClientService } from 'src/app/services/shared/share-client-data/share-data-client.service';
+import { tab } from 'src/variable/script/nav-bar-data';
+import { person } from 'src/variable/script/person';
 
 @Component({
   selector: 'app-body',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BodyComponent implements OnInit {
 
-  constructor() { }
+  tab = tab;
 
-  ngOnInit() : void {
+  constructor(
+    private shareDataClientService : ShareDataClientService
+  ) {}
+
+  ngOnInit() {
+    this.initClient();
+  }
+
+  private initClient() : void {
+    this.shareDataClientService.setClient(person);
   }
 
 }
