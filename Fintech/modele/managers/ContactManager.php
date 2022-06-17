@@ -96,6 +96,28 @@
             }
         }
 
+        // Méthode permettant de connecter un utilisateur 
+        public function login($nomContact) {
+            $contact = null;
+            $valide = false;
+
+            try {
+                $requete = $this->bdd->prepare('SELECT idContact, nomContact, tel, mail, password, idClient, isAdmin, isFirstConnection FROM contact WHERE nomContact = ?');
+
+                $requete->execute(array($nomContact));
+
+                if ($datas = $requete->fetch(PDO::FETCH_ASSOC)) {
+                    $contact = new Contact();
+                    $contact->hydrate($datas);
+                    return $contact;
+                }
+            } catch (Exception $erreur) {
+                die('Erreur : '.$erreur->getMessage());
+            }
+
+            return $valide;
+        }
+
         // méthode nécéssaire pour savoir si le contact existe déjà ?
         // sur le numéro de téléphone ou l'adresse mail, car ce sont des données uniques
         // si ça te semble inutile, tu peux l'enlever

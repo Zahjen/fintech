@@ -29,6 +29,13 @@
     // On récupère le type de requête envoyée, i.e. GET, POST, PUT, DELETE
     $request_method = $_SERVER["REQUEST_METHOD"];
 
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        // The request is using the POST method
+        header("HTTP/1.1 200 OK");
+        return;
+    
+    }
+
     // En instanciant la classe ContactController, et selon la requête, on executera la requête demandée
     $contact_controller = new ContactController($bdd, $request_method, $id_contact);
     $contact_controller->execute_query();

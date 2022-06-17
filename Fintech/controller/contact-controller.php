@@ -102,9 +102,43 @@ class ContactController {
             return $this->not_executable_query();
         }
 
-        $this->contact_manager->add($input);
-        $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        $response['body'] = null;
+        $login = $input['login'];
+        $password = $input['password'];
+        $contact = $this->contact_manager->login($login);
+
+        $res = array(
+            'message' => '',
+            'valid' => false,
+            'firstConnection' => true,
+            'isAdmin' => false
+        );
+
+        if (!$contact) {
+            $res['message'] = "Entered contact does not exist.";
+        } else {
+            if ($contact && $contact->getPassword() === $password) {
+                // On stocke les informations de l'utilisateur
+                $_SESSION['idContact'] = $contact->getIdContact();
+                $_SESSION['mail'] = $contact->getMail();
+                $_SESSION['pseudo'] = $contact->getNomContact();
+                
+                $res['valid'] = true;
+
+                if (!$contact->getIsFirstConnection()) {
+                    $res['firstConnection'] = false;
+                }
+
+                if ($contact->getIsAdmin()) {
+                    $res['isAdmin'] = true;
+                }
+            } else {
+                $res['message'] = "Wrong password.";
+            }
+        }
+
+        //$this->contact_manager->add($input);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($res);
 
         return $response;
 
@@ -153,7 +187,7 @@ class ContactController {
     // Méthode permettant de vérifier qu'une réponse est correcte avant de pouvoir l'insérer ou la mettre à jour dans la base de données
     private function is_contact_valid($input) {
 
-        return isset($input['nomContact']) && isset($input['tel']) && isset($input['mail']) && isset($input['password']) && isset($input['idClient']) && isset($input['isAdmin']);
+        return isset($input['login']) && isset($input['password']);
 
     }
 
