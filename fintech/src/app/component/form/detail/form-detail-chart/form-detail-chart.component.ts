@@ -69,6 +69,7 @@ export class FormDetailChartComponent implements OnInit {
           }]
       },
       options: {
+        responsive: true,
         plugins: {
           legend: {
             display: false

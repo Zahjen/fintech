@@ -96,7 +96,6 @@ export class MyFormSumUpComponent implements OnInit {
     this.formData['totalPoints'] = this.utils.totalPoints(this.questions);
 
     this.formAnswerService.insertForm(this.formToApiAdapter.adapt(this.chosenThirdParty, this.formData, this.questions)).subscribe()
-    console.log(this.formToApiAdapter.adapt(this.chosenThirdParty, this.formData, this.questions))
 
     this.router.navigate(['component/form/result/result-container']);
   }

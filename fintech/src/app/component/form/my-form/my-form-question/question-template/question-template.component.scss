@@ -75,3 +75,13 @@
         color: color.$warning;
     }
 }
+
+@media screen and (max-width: 1100px) {
+    .question-answer-text {
+        @include mixin.width-height(100%, auto);
+    }
+
+    .question-answer-select-container {
+        @include mixin.width-height(auto, auto);
+    }
+}

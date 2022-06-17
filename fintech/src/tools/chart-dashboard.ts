@@ -95,8 +95,6 @@ export class ChartDashboard {
             }   
         })
 
-        console.log(formsByBuisnessLine)
-
         return formsByBuisnessLine;
     }
 

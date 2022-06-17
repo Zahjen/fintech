@@ -37,3 +37,11 @@
         margin-left: 30px;
     }
 }
+
+
+@media screen and (max-width: 1100px) {
+    .my-form-question-container .question-item-container {
+        @include mixin.width-height(100%, 400px);
+        @include mixin.flex(column, center, center);
+    }
+}

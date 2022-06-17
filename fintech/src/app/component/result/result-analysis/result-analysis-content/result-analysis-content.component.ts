@@ -54,6 +54,9 @@ export class ResultAnalysisContentComponent implements OnInit {
               borderWidth: 1
           }]
       },
+      options: {
+        responsive: true,
+      }
     });
   }
 
