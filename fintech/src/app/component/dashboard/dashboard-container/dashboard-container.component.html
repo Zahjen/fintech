@@ -1,4 +1,13 @@
-<h1>Hello</h1>
+<h1>
+    <div class="welcome-dashbord-constainer">
+        <span class="welcome-text">
+            Welcome 
+        </span>
+        <span class="name-text">
+            {{ identity.surname }} {{ identity.name }}
+        </span>
+    </div>    
+</h1>
 
 <div class="semi-circular-container">
     <app-overall-risk-distribution *ngIf="forms$ | async as forms" [forms]="forms"></app-overall-risk-distribution>

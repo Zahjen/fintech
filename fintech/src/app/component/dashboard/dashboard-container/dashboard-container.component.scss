@@ -1,7 +1,21 @@
 @use '../../../../variable/style/mixin';
 
+.welcome-dashbord-constainer {
+    @include mixin.flex(column, flex-start, flex-start);
+    line-height: 35px;
+
+    .welcome-text {
+        font-weight: 300;
+    }
+
+    .name-text {
+        font-size: larger;
+    }
+}
+
 .semi-circular-container {
     @include mixin.width-height(100%, auto);
     @include mixin.flex(row, space-between, center);
     flex-wrap: wrap;
 }
+

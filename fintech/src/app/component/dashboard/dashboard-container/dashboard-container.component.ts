@@ -4,6 +4,7 @@ import { IClient } from 'src/app/interfaces/object-from-api/client';
 import { FormAdaptedService } from 'src/app/services/adapted-data/form-adapted/form-adapted.service';
 import { ShareDataClientService } from 'src/app/services/shared/share-client-data/share-data-client.service';
 import { Form } from 'src/model/form';
+import { identity } from 'src/variable/script/person';
 
 @Component({
   selector: 'app-dashboard-container',
@@ -16,6 +17,8 @@ export class DashboardContainerComponent implements OnInit {
   latestForms$!: Observable<Form[]>;
   client!: IClient;
 
+  identity!: any;
+
   constructor(
     private formAdaptedService: FormAdaptedService,
     private shareDataClientService: ShareDataClientService
@@ -25,6 +28,11 @@ export class DashboardContainerComponent implements OnInit {
     this.initClient();
     this.initForms();
     this.initLatestForms();
+    this.initIdentity();
+  }
+
+  private initIdentity() : void {
+    this.identity = identity;
   }
 
   private initClient() : void {

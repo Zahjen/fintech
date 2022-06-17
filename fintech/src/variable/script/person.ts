@@ -8,3 +8,8 @@ export const person: IClient = {
     ville: "Metz",
     idPays: 77
 }
+
+export const identity = {
+    name: "Name",
+    surname: "Surname"
+}

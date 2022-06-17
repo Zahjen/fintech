@@ -21,7 +21,7 @@
     </div> 
 
     <div class="container-third-party-result">
-        <div *ngFor="let thirdParty of thirdParties | searchFilter: searchForm.value.questionThirdParty1" class="third-party-result-item">
+        <div *ngFor="let thirdParty of thirdParties | searchForm: searchForm.value.questionThirdParty1" class="third-party-result-item">
             <div class="result-company-name">
                 {{ thirdParty.label }}
             </div>

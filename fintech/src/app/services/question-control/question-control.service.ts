@@ -16,11 +16,18 @@ export class QuestionControlService {
 
     questions.forEach(question => {
       group[question.key] = question.required 
-        ? new FormControl(question.value || '', Validators.required)
+        ? new FormControl(question.value || '', question.type === 'text' ? [Validators.required, this.trim] : Validators.required)
         : new FormControl(question.value || '');
     });
     
     return new FormGroup(group);
+  }
+
+
+  trim(control: FormControl) {
+      const isWhitespace = (control.value || '').trim().length === 0;
+      const isValid = !isWhitespace;
+      return isValid ? null : { 'whitespace': true };
   }
 
 }
